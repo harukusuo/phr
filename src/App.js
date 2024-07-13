@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import WelcomeScreen from './components/WelcomeScreen';
 import LoginScreen from './components/Login';
 import HomePage from './components/HomePage';
@@ -9,12 +9,12 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Switch>
-          <Route exact path="/" component={WelcomeScreen} />
-          <Route path="/login" component={LoginScreen} />
-          <Route path="/homepage" component={HomePage} />
-          <Route path="/cadastro" component={Cadastro} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<WelcomeScreen />} />
+          <Route path="/login" element={<LoginScreen />} />
+          <Route path="/homepage" element={<HomePage />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+        </Routes>
       </div>
     </Router>
   );

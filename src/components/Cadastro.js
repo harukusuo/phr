@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-//import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigate } from 'react-router-dom';
+import '../styles/Cadastro.css';
 
-const Cadastro = ({ history }) => {
+const Cadastro = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ const Cadastro = ({ history }) => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordError2, setPasswordError2] = useState('');
+  const navigate = useNavigate();
 
   const handleSignup = () => {
     setEmailError('');
@@ -39,96 +41,57 @@ const Cadastro = ({ history }) => {
       setSignupSuccess(true);
       // Aqui você pode adicionar lógica para enviar os dados para o servidor ou fazer outras ações necessárias
       // Navega para a tela de login após o cadastro bem-sucedido
-      history.push('/login');
+      navigate('/login');
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Cadastro</Text>
-      <TextInput
-        style={styles.input}
+    <div className="container">
+      <h1 className="heading">Cadastro</h1>
+      <input
+        className="input"
+        type="text"
         placeholder="Nome"
         value={firstName}
-        onChangeText={(text) => setFirstName(text)}
+        onChange={(e) => setFirstName(e.target.value)}
       />
-      <TextInput
-        style={styles.input}
+      <input
+        className="input"
+        type="text"
         placeholder="Sobrenome"
         value={lastName}
-        onChangeText={(text) => setLastName(text)}
+        onChange={(e) => setLastName(e.target.value)}
       />
-      <TextInput
-        style={styles.input}
+      <input
+        className="input"
+        type="email"
         placeholder="Email"
-        keyboardType="email-address"
         value={email}
-        onChangeText={(text) => setEmail(text)}
+        onChange={(e) => setEmail(e.target.value)}
       />
-      <Text style={styles.errorMessage}>{emailError}</Text>
-      <TextInput
-        style={styles.input}
+      <p className="errorMessage">{emailError}</p>
+      <input
+        className="input"
+        type="password"
         placeholder="Senha"
-        secureTextEntry={true}
         value={password}
-        onChangeText={(text) => setPassword(text)}
+        onChange={(e) => setPassword(e.target.value)}
       />
-      <TextInput
-        style={styles.input}
+      <input
+        className="input"
+        type="password"
         placeholder="Confirmar Senha"
-        secureTextEntry={true}
         value={confirmPassword}
-        onChangeText={(text) => setConfirmPassword(text)}
+        onChange={(e) => setConfirmPassword(e.target.value)}
       />
-      <Text style={styles.errorMessage}>{passwordError}</Text>
-      <Text style={styles.errorMessage}>{passwordError2}</Text>
-      <TouchableOpacity style={styles.button} onPress={handleSignup}>
-        <Text style={styles.buttonText}>Cadastrar</Text>
-      </TouchableOpacity>
-      {signupSuccess && <Text style={styles.successMessage}>Cadastro realizado com sucesso!</Text>}
-    </View>
+      <p className="errorMessage">{passwordError}</p>
+      <p className="errorMessage">{passwordError2}</p>
+      <div className="button" onClick={handleSignup}>
+        <span className="buttonText">Cadastrar</span>
+      </div>
+      {signupSuccess && <p className="successMessage">Cadastro realizado com sucesso!</p>}
+    </div>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  heading: {
-    fontSize: 24,
-    marginBottom: 20,
-  },
-  input: {
-    width: '80%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-  button: {
-    backgroundColor: '#DD6A00',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  successMessage: {
-    marginTop: 20,
-    color: 'green',
-    fontSize: 16,
-  },
-  errorMessage: {
-    marginBottom: 10,
-    color: 'red',
-    fontSize: 16,
-  },
-});
 
 export default Cadastro;
