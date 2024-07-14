@@ -1,5 +1,10 @@
 import React from 'react';
 import '../styles/HomePage.css';
+import homeIcon from '../assets/home.png'; // Substitua pelo caminho correto das suas imagens
+import searchIcon from '../assets/buscar.png';
+import chatsIcon from '../assets/chats.png';
+import profileIcon from '../assets/perfil.png';
+import postIcon from '../assets/postar.png'; // Supondo que você tenha uma imagem chamada post_icon.png
 
 const HomePage = () => {
   return (
@@ -14,20 +19,21 @@ const HomePage = () => {
 
       <div className="bottomBar">
         <div className="button" onClick={() => console.log('Botão Home pressionado')}>
-          <span className="buttonText">Home</span>
+          <img src={homeIcon} alt="Home" className="icon" />
         </div>
         <div className="button" onClick={() => console.log('Botão Pesquisar pressionado')}>
-          <span className="buttonText">Pesquisar</span>
-        </div>
-        <div className="button" onClick={() => console.log('Botão Postar pressionado')}>
-          <span className="buttonText">Postar</span>
+          <img src={searchIcon} alt="Pesquisar" className="icon" />
         </div>
         <div className="button" onClick={() => console.log('Botão Chats pressionado')}>
-          <span className="buttonText">Chats</span>
+          <img src={chatsIcon} alt="Chats" className="icon" />
         </div>
         <div className="button" onClick={() => console.log('Botão Meu Perfil pressionado')}>
-          <span className="buttonText">Meu Perfil</span>
+          <img src={profileIcon} alt="Meu Perfil" className="icon" />
         </div>
+      </div>
+
+      <div className="floatingButton" onClick={() => console.log('Botão Postar pressionado')}>
+        <img src={postIcon} alt="Postar" className="floatingButtonIcon" />
       </div>
     </div>
   );
