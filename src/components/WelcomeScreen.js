@@ -8,12 +8,12 @@ const WelcomeScreen = () => {
 
   const handleLoginPress = () => {
     console.log('Botão Login pressionado');
-    navigate('/login'); // Navegar para a tela de login
+    navigate('/login');
   };
 
   const handleCadastroPress = () => {
     console.log('Botão Cadastro pressionado');
-    navigate('/cadastro'); // Navegar para a tela de cadastro
+    navigate('/cadastro');
   };
 
   return (

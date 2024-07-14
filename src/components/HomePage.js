@@ -1,10 +1,10 @@
 import React from 'react';
 import '../styles/HomePage.css';
-import homeIcon from '../assets/home.png'; // Substitua pelo caminho correto das suas imagens
+import homeIcon from '../assets/home.png';
 import searchIcon from '../assets/buscar.png';
 import chatsIcon from '../assets/chats.png';
 import profileIcon from '../assets/perfil.png';
-import postIcon from '../assets/postar.png'; // Supondo que você tenha uma imagem chamada post_icon.png
+import postIcon from '../assets/postar.png';
 
 const HomePage = () => {
   return (
