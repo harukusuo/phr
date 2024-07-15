@@ -17,14 +17,20 @@ const WelcomeScreen = () => {
   };
 
   return (
-    <div className="container">
+    <div className="welcomeContainer">
       <img src={petHelpIcon} alt="PetHelp Logo" className="logo" />
       <p>Bem-vindo ao PetHelp!</p>
-      <div className="button" onClick={handleLoginPress}>
-        <span className="buttonText">Já possui uma conta? Clique e faça seu login</span>
+      
+      {/*msg cadastro*/}
+      <p className="message">Primeira vez no site?</p>
+      <div className="button" onClick={handleCadastroPress} style={{ borderRadius: '20px' }}>
+        <span className="buttonText">Realizar cadastro</span>
       </div>
-      <div className="button" onClick={handleCadastroPress}>
-        <span className="buttonText">Clique aqui e crie uma conta agora mesmo!</span>
+      
+      {/*msg login*/}
+      <p className="message">Já é um usuário do PetHelp?</p>
+      <div className="button" onClick={handleLoginPress} style={{ borderRadius: '20px' }}>
+        <span className="buttonText">Realizar login</span>
       </div>
     </div>
   );

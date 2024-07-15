@@ -7,9 +7,28 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    // valida email
+    if (!email.endsWith('@gmail.com') && !email.endsWith('@outlook.com')) {
+      setEmailError('Por favor, insira um e-mail válido.');
+      return;
+    } else {
+      setEmailError('');
+    }
+
+    // valida senha
+    if (password.length < 8) {
+      setPasswordError('A senha deve ter pelo menos 8 caracteres.');
+      return;
+    } else {
+      setPasswordError('');
+    }
+
+    // login bem sucedido
     if (email && password) {
       setLoginSuccess(true);
       navigate('/homepage');
@@ -36,6 +55,7 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)}
           style={{ borderRadius: '15px' }}
         />
+        <p className="errorMessage">{emailError}</p>
       </div>
 
       <div className="inputLabel">
@@ -48,6 +68,7 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           style={{ borderRadius: '15px' }}
         />
+        <p className="errorMessage">{passwordError}</p>
       </div>
 
       <div className="button" onClick={handleLogin}>
