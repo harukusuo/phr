@@ -19,13 +19,11 @@ const Cadastro = () => {
     setPasswordError('');
     setPasswordError2('');
 
-    // valida email
-    if (!email.endsWith('@gmail.com') && !email.endsWith('@outlook.com')) {
+    if (!email.endsWith('@gmail.com') && !email.endsWith('@outlook.com') && !email.endsWith('@educar.rs.gov.br.com') && !email.endsWith('@yahoo.com') && !email.endsWith('@hotmail.com')) {
       setEmailError('Por favor, insira um e-mail válido.');
       return;
     }
 
-    // verifica senha
     if (password !== confirmPassword) {
       setPasswordError('As senhas não coincidem.');
       return;
@@ -36,19 +34,21 @@ const Cadastro = () => {
       return;
     }
 
-    // se estiver tudo correto
     if (firstName && lastName && email && password === confirmPassword) {
       setSignupSuccess(true);
-      // aq add lógica pra enviar dados p servidor etc
-      
-      // vai pro login se tiver td certo
-      navigate('/login');
+
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000); 
     }
   };
 
   return (
     <div className="container">
       <div className="header">
+        <button className="backButton" onClick={() => navigate(-1)}>
+          &#8592;
+        </button>
         <h1 className="headerText">Cadastro</h1>
       </div>
       <p className="welcomeMessage">Vamos iniciar sua jornada PetHelp?</p>

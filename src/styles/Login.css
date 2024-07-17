@@ -7,6 +7,7 @@
 }
 
 .header {
+  position: relative;
   background-color: #DD6A00;
   width: 100%;
   padding: 20px 0;
@@ -78,4 +79,16 @@
   margin-bottom: 10px;
   color: red;
   font-size: 14px;
+}
+
+.backButton {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
 }

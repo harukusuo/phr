@@ -12,32 +12,37 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    setEmailError('');
+    setPasswordError('');
+
     // valida email
-    if (!email.endsWith('@gmail.com') && !email.endsWith('@outlook.com')) {
+    if (!email.endsWith('@gmail.com') && !email.endsWith('@outlook.com') && !email.endsWith('@educar.rs.gov.br.com') && !email.endsWith('@yahoo.com') && !email.endsWith('@hotmail.com')) {
       setEmailError('Por favor, insira um e-mail válido.');
       return;
-    } else {
-      setEmailError('');
     }
 
     // valida senha
     if (password.length < 8) {
       setPasswordError('A senha deve ter pelo menos 8 caracteres.');
       return;
-    } else {
-      setPasswordError('');
     }
 
-    // login bem sucedido
+    // login bem-sucedido
     if (email && password) {
       setLoginSuccess(true);
-      navigate('/homepage');
+      
+      setTimeout(() => {
+        navigate('/homepage');
+      }, 2000);
     }
   };
 
   return (
     <div className="container">
       <div className="header">
+        <button className="backButton" onClick={() => navigate(-1)}>
+          &#8592;
+        </button>
         <h1 className="headerText">Login</h1>
       </div>
       
