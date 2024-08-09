@@ -4,6 +4,7 @@ import WelcomeScreen from './components/WelcomeScreen';
 import LoginScreen from './components/Login';
 import HomePage from './components/HomePage';
 import Cadastro from './components/Cadastro';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/profile/:id" element={<Profile />} />
         </Routes>
       </div>
     </Router>

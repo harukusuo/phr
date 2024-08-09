@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../styles/Cadastro.css';
+import Header from './Header';
+import { useNavigate } from 'react-router-dom';
 
 const Cadastro = () => {
   const [firstName, setFirstName] = useState('');
@@ -44,19 +45,16 @@ const Cadastro = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <button className="backButton" onClick={() => navigate(-1)}>
-          &#8592;
-        </button>
-        <h1 className="headerText">Cadastro</h1>
-      </div>
-      <p className="welcomeMessage">Vamos iniciar sua jornada PetHelp?</p>
+    <div className="cadastro">
 
-      <div className="inputLabel">
-        <p className="labelText">Qual é seu nome?</p>
+      <Header text="Cadastro" />
+      
+      <p className="cadastro-welcomeMessage">Vamos iniciar sua jornada PetHelp?</p>
+
+      <div className="cadastro-inputLabel">
+        <p className="cadastro-labelText">Qual é seu nome?</p>
         <input
-          className="input"
+          className="cadastro-input"
           type="text"
           placeholder="Nome"
           value={firstName}
@@ -65,23 +63,23 @@ const Cadastro = () => {
         />
       </div>
 
-      <div className="inputLabel">
-        <p className="labelText">Qual é seu sobrenome?</p>
+      <div className="cadastro-inputLabel">
+        <p className="cadastro-labelText">Qual é seu sobrenome?</p>
         <input
-          className="input"
+          className="cadastro-input"
           type="text"
           placeholder="Sobrenome"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           style={{ borderRadius: '15px' }}
         />
-        <p className="infoMessage">*Seu nome e sobrenome poderão ser vistos por outros usuários.</p>
+        <p className="cadastro-infoMessage">*Seu nome e sobrenome poderão ser vistos por outros usuários.</p>
       </div>
 
-      <div className="inputLabel">
-        <p className="labelText">Qual é seu e-mail?</p>
+      <div className="cadastro-inputLabel">
+        <p className="cadastro-labelText">Qual é seu e-mail?</p>
         <input
-          className="input"
+          className="cadastro-input"
           type="email"
           placeholder="Email"
           value={email}
@@ -91,10 +89,10 @@ const Cadastro = () => {
         <p className="errorMessage">{emailError}</p>
       </div>
 
-      <div className="inputLabel">
-        <p className="labelText">Escolha uma senha</p>
+      <div className="cadastro-inputLabel">
+        <p className="cadastro-labelText">Escolha uma senha</p>
         <input
-          className="input"
+          className="cadastro-input"
           type="password"
           placeholder="Senha"
           value={password}
@@ -103,8 +101,8 @@ const Cadastro = () => {
         />
       </div>
 
-      <div className="inputLabel">
-        <p className="labelText">Confirme sua senha</p>
+      <div className="cadastro-inputLabel">
+        <p className="cadastro-labelText">Confirme sua senha</p>
         <input
           className="input"
           type="password"
@@ -113,15 +111,17 @@ const Cadastro = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           style={{ borderRadius: '15px' }}
         />
-        <p className="errorMessage">{passwordError}</p>
-        <p className="errorMessage">{passwordError2}</p>
+        <p className="cadastro-errorMessage">{passwordError}</p>
+        <p className="cadastro-errorMessage">{passwordError2}</p>
       </div>
 
-      <div className="button" onClick={handleSignup}>
-        <span className="buttonText">Cadastrar</span>
+      <div className="cadastro-button" onClick={handleSignup}>
+        <span className="cadastro-buttonText">Cadastrar</span>
       </div>
 
-      {signupSuccess && <p className="successMessage">Cadastro realizado com sucesso!</p>}
+      {signupSuccess && <p className="cadastro-successMessage">Cadastro realizado com sucesso!</p>}
+      <hr></hr>
+      <hr></hr>
     </div>
   );
 };

@@ -19,7 +19,7 @@ const WelcomeScreen = () => {
   return (
     <div className="welcomeContainer">
       <img src={petHelpIcon} alt="PetHelp Logo" className="logo" />
-      <p>Bem-vindo ao PetHelp!</p>
+      <p className="titleText">Bem-vindo ao PetHelp!</p>
       
       {/*msg cadastro*/}
       <p className="message">Primeira vez no site?</p>

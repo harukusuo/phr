@@ -1,0 +1,43 @@
+.new-post-form {
+    background-color: #f5cac3; /* Matching pink background */
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.new-post-editor-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333; /* Darker text color */
+}
+
+.new-post-editor-input {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+}
+
+.new-post-submit {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.new-post-submit-button {
+    background-color: #DD6A00; /* Light orange similar to site’s theme */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.new-post-submit-button:hover {
+    background-color: #bd5d02; /* Slightly darker orange on hover */
+}

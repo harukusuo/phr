@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import loginImage from '../assets/loginIMG.png';
+import Header from './Header';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -38,49 +39,46 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <button className="backButton" onClick={() => navigate(-1)}>
-          &#8592;
-        </button>
-        <h1 className="headerText">Login</h1>
-      </div>
+    <div className="login-container">
+      <Header text="Login"/>
       
-      <div className="welcomeMessage">Que bom te ver novamente!</div>
+      <div className="login-welcomeMessage">Que bom te ver novamente!</div>
 
-      <img src={loginImage} alt="Imagem de Bem-Vindo" className="welcomeImage" />
+      <img src={loginImage} alt="Imagem de Bem-Vindo" className="login-welcomeImage" />
 
-      <div className="inputLabel">
-        <p className="labelText">Insira abaixo o seu e-mail:</p>
+      <div className="login-inputLabel">
+        <p className="login-labelText">Insira abaixo o seu e-mail:</p>
         <input
-          className="input"
+          className="login-input"
           type="text"
           placeholder="E-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           style={{ borderRadius: '15px' }}
         />
-        <p className="errorMessage">{emailError}</p>
+        <p className="login-errorMessage">{emailError}</p>
       </div>
 
-      <div className="inputLabel">
-        <p className="labelText">Insira abaixo a sua senha:</p>
+      <div className="login-inputLabel">
+        <p className="login-labelText">Insira abaixo a sua senha:</p>
         <input
-          className="input"
+          className="login-input"
           type="password"
           placeholder="Senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           style={{ borderRadius: '15px' }}
         />
-        <p className="errorMessage">{passwordError}</p>
+        <p className="login-errorMessage">{passwordError}</p>
       </div>
 
-      <div className="button" onClick={handleLogin}>
-        <span className="buttonText">Entrar</span>
+      <div className="login-button" onClick={handleLogin}>
+        <span className="login-buttonText">Entrar</span>
       </div>
 
-      {loginSuccess && <p className="successMessage">Login bem-sucedido!</p>}
+      {loginSuccess && <p className="login-successMessage">Login bem-sucedido!</p>}
+      <hr></hr>
+      <hr></hr>
     </div>
   );
 };

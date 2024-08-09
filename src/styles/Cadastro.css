@@ -1,4 +1,4 @@
-.container {
+.cadastro {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,19 +6,7 @@
   height: 100vh;
 }
 
-.header {
-  background-color: #DD6A00;
-  width: 100%;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.headerText {
-  color: white;
-  font-size: 20px;
-}
-
-.welcomeMessage {
+.cadastro-welcomeMessage {
   color: black;
   font-size: 18px;
   font-weight: bold;
@@ -27,19 +15,19 @@
   margin-top: 20px;
 }
 
-.inputLabel {
+.cadastro-inputLabel {
   width: 80%;
   margin-bottom: 20px;
   text-align: center;
 }
 
-.labelText {
+.cadastro-labelText {
   color: black;
   font-size: 14px;
   font-weight: bold;
 }
 
-.input {
+.cadastro-input {
   width: 100%;
   height: 40px;
   border: 1px solid gray;
@@ -47,7 +35,7 @@
   padding: 0 10px;
 }
 
-.button {
+.cadastro-button {
   background-color: #DD6A00;
   padding: 10px 20px;
   border-radius: 5px;
@@ -56,24 +44,26 @@
   text-decoration: none;
 }
 
-.buttonText {
+.cadastro-buttonText {
   color: white;
   font-size: 16px;
 }
 
-.successMessage {
+.cadastro-successMessage {
   margin-top: 20px;
   color: green;
   font-size: 16px;
+  font-weight: bold;
 }
 
-.errorMessage {
+.cadastro-errorMessage {
   margin-bottom: 10px;
   color: red;
   font-size: 16px;
+  font-weight: bold;
 }
 
-.infoMessage {
+.cadastro-infoMessage {
   color: #DD6A00;
   font-size: 12px;
   text-align: center;
@@ -81,14 +71,3 @@
   font-weight: bold;
 }
 
-.backButton {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-}

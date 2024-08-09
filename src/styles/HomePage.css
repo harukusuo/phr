@@ -1,12 +1,4 @@
-body, html {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-}
-
-.container {
+.homepage-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,28 +8,9 @@ body, html {
   background-color: #fff;
 }
 
-.header {
-  background-color: #DD6A00;
-  width: 100%;
-  padding: 20px 0;
-  text-align: center;
-  flex-shrink: 0;
-}
-
-.headerText {
-  color: white;
-  font-size: 20px;
-}
-
-.content {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.bottomBar {
+.homepage-bottomBar {
+  position: fixed;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -45,26 +18,29 @@ body, html {
   padding: 10px 0;
   width: 100%;
   flex-shrink: 0;
+  height: 60px;
 }
 
-.button {
+.homepage-button {
   padding: 10px;
   color: white;
   cursor: pointer;
   text-decoration: none;
   border-radius: 5px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.button.active .icon {
-  filter: brightness(0.7);
+.homepage-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.icon {
+.homepage-icon {
   width: 32px;
   height: 32px;
 }
 
-.floatingButton {
+.homepage-newPostButton {
   position: fixed;
   bottom: 80px;
   right: 20px;
@@ -77,13 +53,16 @@ body, html {
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-.floatingButton.active .floatingButtonIcon {
-  filter: brightness(0.7);
+.homepage-newPostButton:active {
+  transform: scale(0.9);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.floatingButtonIcon {
+.homepage-newPostButtonIcon {
   width: 32px;
   height: 32px;
 }
+

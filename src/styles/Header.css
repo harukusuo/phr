@@ -1,0 +1,25 @@
+.header {
+    position: relative;
+    background-color: #DD6A00;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.headerText {
+    color: white;
+    font-size: 20px;
+}
+
+.backButton {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
