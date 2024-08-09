@@ -1,6 +1,7 @@
 {
     "id": 1,
     "name": "Sarah",
+    "sobrenome": "Batista",
     "profilePicture": "https://robohash.org/sarah",
     "followers": 231,
     "following": 123

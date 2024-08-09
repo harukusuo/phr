@@ -1,0 +1,31 @@
+.colapsavel-container {
+    width: 100%;
+    margin-bottom: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.colapsavel-header {
+    color: black;
+    cursor: pointer;
+    align-self: end;
+    display: flex;
+    align-items: center;
+}
+
+.colapsavel-header:focus {
+    outline: none;
+}
+
+.colapsavel-icon {
+    font-size: 1.5rem;
+    width: 1.5rem;
+    text-align: center;
+}
+
+.colapsavel-content {
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+}

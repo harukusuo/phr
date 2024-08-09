@@ -1,5 +1,6 @@
 import "../styles/Post.css";
 import { useNavigate } from "react-router-dom";
+import Colapsavel from "./Colapsavel";
 
 function timeSince(date) {
 
@@ -44,7 +45,7 @@ const Post = ({ user, post }) => {
                     <img src={user.profilePicture} alt={`${user.name}'s profile`} className="post-profile-pic" />
                 </div>
                 <div className="post-header-info">
-                    <span className="post-header-info-username" onClick={() => handleUserClick(user.id)}>{user.name}</span>
+                    <span className="post-header-info-username" onClick={() => handleUserClick(user.id)}>{user.name} {user.sobrenome}</span>
                     <span className="post-header-info-time" title={new Date(post.time).toLocaleString()}>{timeSince(new Date(post.time))} atrás</span>
                 </div>
             </div>
@@ -55,16 +56,20 @@ const Post = ({ user, post }) => {
                 <span>{post.likes} likes</span>
 
             </div>
-            <div className="post-comments">
-                {post.comments.map(comment => (
-                    <div key={comment.id} className="comment">
-                        <div className="comment-profile-pic-container">
-                            <img src={comment.user.profilePicture} alt={`${comment.user.name}'s profile`} className="comment-profile-pic" />
+            <Colapsavel title="Ver comentários ">
+                <div className="post-comments">
+                    {post.comments.map(comment => (
+                        <div key={comment.id} className="comment">
+                            <div className="comment-profile-pic-container" onClick={() => handleUserClick(comment.user.id)}>
+                                <img src={comment.user.profilePicture} alt={`${comment.user.name} ${comment.user.sobrenome}'s profile`} className="comment-profile-pic" />
+                            </div>
+                            <div>
+                                <span className="comment-profile-username-container" onClick={() => handleUserClick(comment.user.id)}>{comment.user.name} {comment.user.sobrenome}</span>: {comment.content}
+                            </div>
                         </div>
-                        <p><strong>{comment.user.name}</strong>: {comment.content}</p>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </Colapsavel>
         </div>
     );
 }

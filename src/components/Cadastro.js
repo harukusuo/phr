@@ -104,7 +104,7 @@ const Cadastro = () => {
       <div className="cadastro-inputLabel">
         <p className="cadastro-labelText">Confirme sua senha</p>
         <input
-          className="input"
+          className="cadastro-input"
           type="password"
           placeholder="Confirmar Senha"
           value={confirmPassword}

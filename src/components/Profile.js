@@ -1,8 +1,9 @@
 import Header from './Header';
 import Posts from './Posts';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import fakeUser from "../mock/user.json";
 import fakePosts from "../mock/posts.json";
+import '../styles/Profile.css';
 
 const Profile = () => {
 
@@ -25,17 +26,21 @@ const Profile = () => {
         setPosts(fakePosts);
     }, [userId]);
 
-    const title = user.name + "'s Profile";
+    const title = "Perfil de " + user.name;
 
     return (
         <div className="profile">
-            <Header text={title}/>
+            <Header text={`Perfil de ${user.name} ${user.sobrenome}`}/>
 
             <div className="profile-content">
                 <div className='profile-content-info'>
-                <span className="profile-username">{user.name}</span>
-                <span className="profile-follow">{user.followers} seguidores</span>
-                <span className="profile-follow">{user.following} seguindo</span>
+                    <div className='profile-content-info-header'>
+                        <span className="profile-username">{user.name} {user.sobrenome}</span>
+                    </div>
+                    <div className='profile-content-info-body'> 
+                        <span className="profile-follow">{user.followers} seguidores</span>
+                        <span className="profile-follow">{user.following} seguindo</span>
+                    </div>
                 </div>
                 <div className='profile-content-image'>
                     <img src={user.profilePicture} alt={user.name} />
