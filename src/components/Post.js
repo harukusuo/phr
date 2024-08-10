@@ -1,42 +1,45 @@
 import "../styles/Post.css";
 import { useNavigate } from "react-router-dom";
 import Colapsavel from "./Colapsavel";
+import { useState } from "react";
 
 function timeSince(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    const interval = seconds / 31536000;
 
-    var seconds = Math.floor((new Date() - date) / 1000);
-
-    var interval = seconds / 31536000;
-
-    if (interval > 1) {
-        return Math.floor(interval) + " anos";
+    if (interval >= 1) {
+        return Math.floor(interval) === 1 ? "1 ano" : Math.floor(interval) + " anos";
     }
-    interval = seconds / 2592000;
-    if (interval > 1) {
-        return Math.floor(interval) + " meses";
+    const intervalMonths = seconds / 2592000;
+    if (intervalMonths >= 1) {
+        return Math.floor(intervalMonths) === 1 ? "1 mês" : Math.floor(intervalMonths) + " meses";
     }
-    interval = seconds / 86400;
-    if (interval > 1) {
-        return Math.floor(interval) + " dias";
+    const intervalDays = seconds / 86400;
+    if (intervalDays >= 1) {
+        return Math.floor(intervalDays) === 1 ? "1 dia" : Math.floor(intervalDays) + " dias";
     }
-    interval = seconds / 3600;
-    if (interval > 1) {
-        return Math.floor(interval) + " horas";
+    const intervalHours = seconds / 3600;
+    if (intervalHours >= 1) {
+        return Math.floor(intervalHours) === 1 ? "1 hora" : Math.floor(intervalHours) + " horas";
     }
-    interval = seconds / 60;
-    if (interval > 1) {
-        return Math.floor(interval) + " minutos";
+    const intervalMinutes = seconds / 60;
+    if (intervalMinutes >= 1) {
+        return Math.floor(intervalMinutes) === 1 ? "1 minuto" : Math.floor(intervalMinutes) + " minutos";
     }
-    return Math.floor(seconds) + " segundos";
+    return Math.floor(seconds) === 1 ? "1 segundo" : Math.floor(seconds) + " segundos";
 }
 
 const Post = ({ user, post }) => {
-
     const navigate = useNavigate();
+    const [isLiked, setIsLiked] = useState(false); // verifica se o post foi curtido
 
     const handleUserClick = (userId) => {
         navigate(`/profile/${userId}`);
-    }
+    };
+
+    const handleLikeClick = () => {
+        setIsLiked(!isLiked); // muda entre curtido/n curtido
+    };
 
     return (
         <div className="post">
@@ -53,10 +56,14 @@ const Post = ({ user, post }) => {
                 <p>{post.content}</p>
             </div>
             <div className="post-footer">
-                <span>{post.likes} likes</span>
-
+                <div className="like-container" onClick={handleLikeClick}>
+                    <span className="material-symbols-outlined like-icon">
+                        {isLiked ? 'heart_check' : 'heart_plus'}
+                    </span>
+                    <span>{post.likes + (isLiked ? 1 : 0)} likes</span>
+                </div>
             </div>
-            <Colapsavel title="Ver comentários ">
+            <Colapsavel title="Ver comentários">
                 <div className="post-comments">
                     {post.comments.map(comment => (
                         <div key={comment.id} className="comment">
@@ -72,6 +79,6 @@ const Post = ({ user, post }) => {
             </Colapsavel>
         </div>
     );
-}
+};
 
 export default Post;
