@@ -57,6 +57,11 @@
     color: #555;
 }
 
+.post-sem {
+    align-self: flex-end;
+    margin-right: 1rem;
+}
+
 .like-container {
     display: flex;
     align-items: center;

@@ -1,6 +1,7 @@
 import Header from './Header';
 import Posts from './Posts';
 import { useState, useEffect, useCallback } from 'react';
+import { useParams } from 'react-router-dom';
 import fakeUser from "../mock/user.json";
 import fakePosts from "../mock/posts.json";
 import '../styles/Profile.css';
@@ -10,21 +11,21 @@ const Profile = () => {
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
 
-    const userId = useCallback(() => (this.props.match.params.id)(), []);
-    
+    const { id } = useParams(); 
+
     useEffect(() => {
-        /*fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+        /*fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
             .then(response => response.json())
             .then(data => setUser(data));*/
         setUser(fakeUser);
-    }, [userId]);
+    }, [id]);
     
     useEffect(() => {
-        /*fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+        /*fetch(`https://jsonplaceholder.typicode.com/posts?id=${id}`)
             .then(response => response.json())
             .then(data => setPosts(data));*/
         setPosts(fakePosts);
-    }, [userId]);
+    }, [id]);
 
     const title = "Perfil de " + user.name;
 

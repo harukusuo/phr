@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "name": "Clara",
+        "sobrenome": "Balbino",
+        "profilePicture": "https://robohash.org/Clara",
+        "followers": 231,
+        "following": 123
+    },
+    {
+        "id": 2,
+        "name": "Lucas",
+        "sobrenome": "Ferreira",
+        "profilePicture": "https://robohash.org/Lucas",
+        "followers": 452,
+        "following": 87
+    },
+    {
+        "id": 3,
+        "name": "Isabella",
+        "sobrenome": "Mendes",
+        "profilePicture": "https://robohash.org/Isabella",
+        "followers": 305,
+        "following": 190
+    },
+    {
+        "id": 4,
+        "name": "Gabriel",
+        "sobrenome": "Silva",
+        "profilePicture": "https://robohash.org/Gabriel",
+        "followers": 678,
+        "following": 245
+    },
+    {
+        "id": 5,
+        "name": "Mariana",
+        "sobrenome": "Almeida",
+        "profilePicture": "https://robohash.org/Mariana",
+        "followers": 512,
+        "following": 320
+    },
+    {
+        "id": 6,
+        "name": "Thiago",
+        "sobrenome": "Pereira",
+        "profilePicture": "https://robohash.org/Thiago",
+        "followers": 98,
+        "following": 72
+    },
+    {
+        "id": 7,
+        "name": "Ana",
+        "sobrenome": "Costa",
+        "profilePicture": "https://robohash.org/Ana",
+        "followers": 150,
+        "following": 130
+    },
+    {
+        "id": 8,
+        "name": "Rafael",
+        "sobrenome": "Santos",
+        "profilePicture": "https://robohash.org/Rafael",
+        "followers": 289,
+        "following": 201
+    },
+    {
+        "id": 9,
+        "name": "Beatriz",
+        "sobrenome": "Rocha",
+        "profilePicture": "https://robohash.org/Beatriz",
+        "followers": 400,
+        "following": 185
+    },
+    {
+        "id": 10,
+        "name": "Pedro",
+        "sobrenome": "Oliveira",
+        "profilePicture": "https://robohash.org/Pedro",
+        "followers": 620,
+        "following": 500
+    }
+]

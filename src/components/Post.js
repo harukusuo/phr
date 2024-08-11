@@ -41,6 +41,8 @@ const Post = ({ user, post }) => {
         setIsLiked(!isLiked); // muda entre curtido/n curtido
     };
 
+    const hasComments = post.comments.length > 0;
+
     return (
         <div className="post">
             <div className="post-header">
@@ -63,7 +65,7 @@ const Post = ({ user, post }) => {
                     <span>{post.likes + (isLiked ? 1 : 0)} likes</span>
                 </div>
             </div>
-            <Colapsavel title="Ver comentários">
+            {hasComments ? <Colapsavel title="Ver comentários">
                 <div className="post-comments">
                     {post.comments.map(comment => (
                         <div key={comment.id} className="comment">
@@ -76,7 +78,12 @@ const Post = ({ user, post }) => {
                         </div>
                     ))}
                 </div>
-            </Colapsavel>
+            </Colapsavel> : 
+            <div className="colapsavel-container">
+                <div className="post-sem">Sem comentários</div>
+            </div>
+            }
+            
         </div>
     );
 };
