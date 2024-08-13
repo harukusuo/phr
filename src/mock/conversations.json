@@ -1,0 +1,66 @@
+[
+    {
+        "user": {
+            "id": 2,
+            "name": "Lucas",
+            "sobrenome": "Ferreira",
+            "profilePicture": "https://robohash.org/Lucas",
+            "followers": 452,
+            "following": 87
+        },
+        "messages": [
+            {
+                "userId": 1,
+                "text": "Certo! Obrigada.",
+                "timestamp": "2021-01-01T12:05:00"
+            },
+            {
+                "userId": 2,
+                "text": "Devido às festas tradicionais, você sabe né.",
+                "timestamp": "2021-01-01T12:04:00"
+            },
+            {
+                "userId": 2,
+                "text": "Ouvi dizer que vai ser adiantada para o próximo final de semana.",
+                "timestamp": "2021-01-01T12:03:00"
+            },
+            {
+                "userId": 1,
+                "text": "Sobre a campanha de adoção em Três Coroas, você sabe algo?",
+                "timestamp": "2021-01-01T12:02:00"
+            },
+            {
+                "userId": 2,
+                "text": "Boa tarde!!",
+                "timestamp": "2021-01-01T12:01:00"
+            },
+            {
+                "userId": 1,
+                "text": "Boa tarde, Lucas!",
+                "timestamp": "2021-01-01T12:00:00"
+            }
+        ]
+    },
+    {
+        "user": {
+            "id": 3,
+            "name": "Isabella",
+            "sobrenome": "Mendes",
+            "profilePicture": "https://robohash.org/Isabella",
+            "followers": 305,
+            "following": 190
+        },
+        "messages": [
+            {
+                "userId": 3,
+                "text": "Olá! Ele está se recuperando bem, obrigada.",
+                "timestamp": "2021-01-01T12:03:00"
+            },
+            {
+                "userId": 1,
+                "text": "Oii, como está Paçoquinha, seu gato?",
+                "timestamp": "2021-01-01T12:02:00"
+            }
+        ]
+    }
+]

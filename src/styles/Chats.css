@@ -1,8 +1,50 @@
 .chats-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    background-color: #fff;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #fff;
+}
+
+.chats-messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.chats-message {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.chats-message-avatar {
+  background-color: lightgray;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 10px;
+}
+
+.chats-message-avatar img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.chats-message-body {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.chats-message-user {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.chats-message-text {
+  background-color: #e2e2e2;
+
+}
