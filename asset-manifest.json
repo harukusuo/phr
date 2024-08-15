@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/seu-repositorio/static/css/main.2a13c6fb.css",
-    "main.js": "/seu-repositorio/static/js/main.4118c29c.js",
-    "static/media/loginIMG.png": "/seu-repositorio/static/media/loginIMG.22f85f20da40308d49bc.png",
-    "static/media/searching.png": "/seu-repositorio/static/media/searching.f16958af6ef43a730199.png",
-    "static/media/enviar.png": "/seu-repositorio/static/media/enviar.1a9654352414af81123f.png",
-    "static/media/chats.png": "/seu-repositorio/static/media/chats.c1ea29e643060ecb442c.png",
-    "static/media/buscar.png": "/seu-repositorio/static/media/buscar.60497d224d4b6793f9f2.png",
-    "static/media/perfil.png": "/seu-repositorio/static/media/perfil.043529b355b9994761b3.png",
-    "static/media/postar.png": "/seu-repositorio/static/media/postar.36f6395bb4ac09d68513.png",
-    "static/media/home.png": "/seu-repositorio/static/media/home.015f2ab4b85387d51daa.png",
-    "index.html": "/seu-repositorio/index.html",
-    "main.2a13c6fb.css.map": "/seu-repositorio/static/css/main.2a13c6fb.css.map",
-    "main.4118c29c.js.map": "/seu-repositorio/static/js/main.4118c29c.js.map"
+    "main.css": "/phr/static/css/main.2a13c6fb.css",
+    "main.js": "/phr/static/js/main.d5b24315.js",
+    "static/media/loginIMG.png": "/phr/static/media/loginIMG.22f85f20da40308d49bc.png",
+    "static/media/searching.png": "/phr/static/media/searching.f16958af6ef43a730199.png",
+    "static/media/enviar.png": "/phr/static/media/enviar.1a9654352414af81123f.png",
+    "static/media/chats.png": "/phr/static/media/chats.c1ea29e643060ecb442c.png",
+    "static/media/buscar.png": "/phr/static/media/buscar.60497d224d4b6793f9f2.png",
+    "static/media/perfil.png": "/phr/static/media/perfil.043529b355b9994761b3.png",
+    "static/media/postar.png": "/phr/static/media/postar.36f6395bb4ac09d68513.png",
+    "static/media/home.png": "/phr/static/media/home.015f2ab4b85387d51daa.png",
+    "index.html": "/phr/index.html",
+    "main.2a13c6fb.css.map": "/phr/static/css/main.2a13c6fb.css.map",
+    "main.d5b24315.js.map": "/phr/static/js/main.d5b24315.js.map"
   },
   "entrypoints": [
     "static/css/main.2a13c6fb.css",
-    "static/js/main.4118c29c.js"
+    "static/js/main.d5b24315.js"
   ]
 }
