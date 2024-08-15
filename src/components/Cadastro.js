@@ -86,7 +86,7 @@ const Cadastro = () => {
           onChange={(e) => setEmail(e.target.value)}
           style={{ borderRadius: '15px' }}
         />
-        <p className="errorMessage">{emailError}</p>
+        <p className="cadastro-errorMessage">{emailError}</p>
       </div>
 
       <div className="cadastro-inputLabel">
