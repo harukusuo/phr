@@ -1,0 +1,19 @@
+button{
+    height: 200px;
+    width: 200px;
+}
+
+.petspage-missing-button img{
+    height: 200px;
+    width: 200px;
+}
+
+.petspage-found-button img{
+    height: 200px;
+    width: 200px;
+}
+
+.buttons-pets{
+    display: flex;
+    flex-direction: row;
+}

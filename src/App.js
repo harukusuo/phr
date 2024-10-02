@@ -8,16 +8,18 @@ import Cadastro from './components/Cadastro';
 import Chats from './components/Chats';
 import Chat from './components/Chat';
 import Profile from './components/Profile';
+import Pets from './components/Pets';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/phr">
       <div className="App">
         <Routes>
           <Route path="/" element={<WelcomeScreen />} />
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/search/:query?" element={<SearchPage />} />
+          <Route path="/pets" element={<Pets />} />
           <Route path="/chats" element={<Chats />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/cadastro" element={<Cadastro />} />

@@ -4,6 +4,7 @@ import homeIcon from '../assets/home.png';
 import searchIcon from '../assets/buscar.png';
 import chatsIcon from '../assets/chats.png';
 import profileIcon from '../assets/perfil.png';
+import petsIcon from '../assets/pets.png';
 import '../styles/BottomBar.css';
 
 const BottomBar = ({user}) => {
@@ -16,6 +17,10 @@ const BottomBar = ({user}) => {
 
     const handleSearchPress = () => {
         navigate('/search');
+    };
+
+    const handlePetsPress = () => {
+        navigate('/pets');
     };
 
     const handleChatPress = () => {
@@ -31,7 +36,7 @@ const BottomBar = ({user}) => {
 
     const handleButtonClick = (buttonName) => {
         setActiveButton(buttonName);
-        console.log(`Botão ${buttonName} pressionado`);
+        console.log(`Botão ${buttonName} pressionado...`);
     };
 
     useEffect(() => {
@@ -63,6 +68,15 @@ const BottomBar = ({user}) => {
                 }}
             >
                 <img src={searchIcon} alt="Pesquisar" className="bottomBar-icon" />
+            </div>
+            <div
+                className={`bottomBar-button ${activeButton === 'pets' ? 'bottomBar-active' : ''}`}
+                onClick={() => {
+                    handleButtonClick('pets');
+                    handlePetsPress();
+                }}
+            >
+                <img src={petsIcon} alt="Pets" className="bottomBar-icon" />
             </div>
             <div
                 className={`bottomBar-button ${activeButton === 'chats' ? 'bottomBar-active' : ''}`}

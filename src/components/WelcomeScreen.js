@@ -21,7 +21,7 @@ const WelcomeScreen = () => {
       <img src={petHelpIcon} alt="PetHelp Logo" className="logo" />
       <p className="titleText">Bem-vindo ao PetHelp!</p>
       
-      {/*msg cadastro*/}
+      {/*mensagem do cadastro*/}
       <p className="message">Primeira vez no site?</p>
       <div className="button" onClick={handleCadastroPress} style={{ borderRadius: '20px' }}>
         <span className="buttonText">Realizar cadastro</span>

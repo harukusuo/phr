@@ -1,0 +1,46 @@
+[
+    {
+        "id": 1,
+        "name": "Floquinho",
+        "type": "cão",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Clara",
+        "ownerSobrenome": "Balbino",
+        "descricao": "Cachorro dócil de pelagem preta, é um vira-lata curioso. Vimos ele pela última vez nas câmeras de casa pelas 20h.",
+        "city": "Parobé",
+        "local": "Bairro Laranjeiras, próximo ao RedeFort."
+    },
+    {
+        "id": 2,
+        "name": "Mia",
+        "type": "gato",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "João",
+        "ownerSobrenome": "Silva",
+        "descricao": "Gata cinza com olhos verdes, muito arisca com desconhecidos. Fugiu pela janela por volta das 18h.",
+        "city": "Taquara",
+        "local": "Centro, próximo à Praça Marechal Deodoro."
+    },
+    {
+        "id": 3,
+        "name": "Rex",
+        "type": "cão",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Mariana",
+        "ownerSobrenome": "Santos",
+        "descricao": "Cachorro grande de raça pastor alemão, muito obediente. Escapou do portão enquanto a família saía de carro.",
+        "city": "Igrejinha",
+        "local": "Bairro Figueira, perto da Escola Estadual Dom Pedro II."
+    },
+    {
+        "id": 4,
+        "name": "Luna",
+        "type": "gato",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Pedro",
+        "ownerSobrenome": "Almeida",
+        "descricao": "Gata branca com manchas marrons, está em tratamento de saúde e precisa de cuidados. Desapareceu pela manhã.",
+        "city": "Três Coroas",
+        "local": "Bairro Sander, próximo ao Mercado Bom Preço."
+    }
+]
