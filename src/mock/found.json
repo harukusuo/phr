@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "name": "Toby",
+        "type": "cão",
+        "animalPicture": "https://dog.ceo/api/breeds/image/random",
+        "ownerName": "Eduardo",
+        "ownerSobrenome": "Matos",
+        "descricao": "Cachorro pequeno de raça pug, desapareceu durante um passeio na praça.",
+        "city": "Porto Alegre",
+        "local": "Parque Farroupilha, próximo ao lago."
+    },
+    {
+        "id": 2,
+        "name": "Pipoca",
+        "type": "gato",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Gabriela",
+        "ownerSobrenome": "Duarte",
+        "descricao": "Gata tricolor, muito brincalhona, desapareceu pela manhã.",
+        "city": "São Leopoldo",
+        "local": "Bairro Scharlau, perto da padaria."
+    },
+    {
+        "id": 3,
+        "name": "Bento",
+        "type": "cão",
+        "animalPicture": "https://dog.ceo/api/breeds/image/random",
+        "ownerName": "Fernanda",
+        "ownerSobrenome": "Silveira",
+        "descricao": "Cachorro de porte grande, muito amigável, saiu correndo atrás de outro cachorro.",
+        "city": "Canoas",
+        "local": "Bairro Rio Branco, perto do supermercado."
+    },
+    {
+        "id": 4,
+        "name": "Juju",
+        "type": "gato",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Rafaela",
+        "ownerSobrenome": "Lopes",
+        "descricao": "Gata preta com uma mancha branca no peito. Desapareceu durante a madrugada.",
+        "city": "Gravataí",
+        "local": "Bairro Morada do Vale, próximo à escola."
+    },
+    {
+        "id": 5,
+        "name": "Fred",
+        "type": "cão",
+        "animalPicture": "https://dog.ceo/api/breeds/image/random",
+        "ownerName": "Lucas",
+        "ownerSobrenome": "Vieira",
+        "descricao": "Cachorro de porte médio com pelagem marrom. Fugiu do quintal enquanto os portões estavam abertos.",
+        "city": "Guaíba",
+        "local": "Bairro Santa Rita, próximo à praça."
+    },
+    {
+        "id": 6,
+        "name": "Mel",
+        "type": "gato",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Juliana",
+        "ownerSobrenome": "Cardoso",
+        "descricao": "Gata siamesa com olhos azuis. Saiu para passear e não voltou.",
+        "city": "Viamão",
+        "local": "Bairro Tarumã, perto da farmácia."
+    },
+    {
+        "id": 7,
+        "name": "Bolota",
+        "type": "cão",
+        "animalPicture": "https://dog.ceo/api/breeds/image/random",
+        "ownerName": "Miguel",
+        "ownerSobrenome": "Ferreira",
+        "descricao": "Cachorro peludo, brincalhão, desapareceu enquanto estava no quintal.",
+        "city": "Alvorada",
+        "local": "Bairro Americana, perto da praça."
+    },
+    {
+        "id": 8,
+        "name": "Lola",
+        "type": "gato",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Patrícia",
+        "ownerSobrenome": "Rocha",
+        "descricao": "Gata de pelagem marrom com manchas brancas. Fugiu pela janela pela manhã.",
+        "city": "Sapucaia do Sul",
+        "local": "Bairro Vargas, próximo ao hospital."
+    }
+]

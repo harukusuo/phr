@@ -9,6 +9,8 @@ import Chats from './components/Chats';
 import Chat from './components/Chat';
 import Profile from './components/Profile';
 import Pets from './components/Pets';
+import Perdidos from './components/Perdidos';
+import Achados from './components/Achados';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/homepage" element={<HomePage />} />
           <Route path="/search/:query?" element={<SearchPage />} />
           <Route path="/pets" element={<Pets />} />
+          <Route path="/perdidos" element={<Perdidos />} />
+          <Route path="/achados" element={<Achados />} />
           <Route path="/chats" element={<Chats />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/cadastro" element={<Cadastro />} />

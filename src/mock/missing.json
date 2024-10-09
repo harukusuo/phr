@@ -42,5 +42,49 @@
         "descricao": "Gata branca com manchas marrons, está em tratamento de saúde e precisa de cuidados. Desapareceu pela manhã.",
         "city": "Três Coroas",
         "local": "Bairro Sander, próximo ao Mercado Bom Preço."
+    },
+    {
+        "id": 5,
+        "name": "Max",
+        "type": "cão",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Carlos",
+        "ownerSobrenome": "Pereira",
+        "descricao": "Cachorro de porte médio, muito amigável. Ele fugiu durante uma caminhada no parque.",
+        "city": "Novo Hamburgo",
+        "local": "Parque Floresta Imperial."
+    },
+    {
+        "id": 6,
+        "name": "Bella",
+        "type": "gato",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Larissa",
+        "ownerSobrenome": "Oliveira",
+        "descricao": "Gata de pelagem branca, olhos azuis. Fugiu de casa pela noite.",
+        "city": "Sapiranga",
+        "local": "Bairro Centenário, próximo à igreja."
+    },
+    {
+        "id": 7,
+        "name": "Thor",
+        "type": "cão",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Bruno",
+        "ownerSobrenome": "Menezes",
+        "descricao": "Cachorro de raça pitbull, muito dócil e carinhoso. Escapou do quintal à tarde.",
+        "city": "Campo Bom",
+        "local": "Bairro Paulista, perto da academia."
+    },
+    {
+        "id": 8,
+        "name": "Nina",
+        "type": "gato",
+        "animalPicture": "https://cataas.com/cat?width=300&height=300",
+        "ownerName": "Tatiana",
+        "ownerSobrenome": "Souza",
+        "descricao": "Gata preta com olhos dourados, desapareceu pela manhã quando saiu para passear.",
+        "city": "Estância Velha",
+        "local": "Bairro União, próximo ao posto de gasolina."
     }
 ]
