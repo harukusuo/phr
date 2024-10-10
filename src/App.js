@@ -11,6 +11,7 @@ import Profile from './components/Profile';
 import Pets from './components/Pets';
 import Perdidos from './components/Perdidos';
 import Achados from './components/Achados';
+import AddAnimal from './components/AddAnimal';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/pets" element={<Pets />} />
           <Route path="/perdidos" element={<Perdidos />} />
           <Route path="/achados" element={<Achados />} />
+          <Route path="/AddAnimal" element={<AddAnimal />} />
           <Route path="/chats" element={<Chats />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/cadastro" element={<Cadastro />} />

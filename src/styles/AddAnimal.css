@@ -1,0 +1,46 @@
+.add-animal-container {
+    padding: 20px;
+    background-color: #FFF3E0;
+  }
+  
+  .add-animal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .add-animal-form label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .add-animal-form input,
+  .add-animal-form select,
+  .add-animal-form textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  .add-animal-form textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  .submit-button {
+    padding: 10px 20px;
+    background-color: #DD6A00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-button:hover {
+    background-color: #C25B00;
+  }
+  

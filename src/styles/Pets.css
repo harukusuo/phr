@@ -1,19 +1,29 @@
-button{
+button {
     height: 200px;
     width: 200px;
-}
-
-.petspage-missing-button img{
+  }
+  
+  .petspage-missing-button img,
+  .petspage-found-button img {
     height: 200px;
     width: 200px;
-}
-
-.petspage-found-button img{
-    height: 200px;
-    width: 200px;
-}
-
-.buttons-pets{
+  }
+  
+  .buttons-pets {
     display: flex;
     flex-direction: row;
-}
+  }
+  
+  .add-animal-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .add-animal-button img {
+    height: 60px;
+    width: 60px;
+  }
+  
