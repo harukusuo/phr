@@ -66,9 +66,6 @@ const SearchPage = () => {
                     </div>
                 ))}
             </div>
-
-
-            <BottomBar user={user}/>
         </div>
     );
 }

@@ -12,30 +12,13 @@ import Pets from './components/Pets';
 import Perdidos from './components/Perdidos';
 import Achados from './components/Achados';
 import AddAnimal from './components/AddAnimal';
-import SideBar from './components/SideBar';
-import BottomBar from './components/BottomBar';
+import NavBar from './components/NavBar';
 
 function App() {
-  // Define quais rotas devem ter a barra
-  const routesWithSidebar = [
-    '/homepage',
-    '/pets',
-    '/chats',
-    '/profile/:id',
-    '/achados',
-    '/perdidos',
-    '/AddAnimal',
-  ];
-
-  return (
+    return (
     <Router basename="/phr">
       <div className="App">
-        {routesWithSidebar.some(route => window.location.pathname.match(route)) && (
-          <SideBar />
-        )}
-        {routesWithSidebar.some(route => window.location.pathname.match(route)) ? (
-          <BottomBar />
-        ) : null}
+        <NavBar/>
         <Routes>
           <Route path="/" element={<WelcomeScreen />} />
           <Route path="/login" element={<LoginScreen />} />

@@ -7,7 +7,6 @@ import '../styles/HomePage.css';
 import postIcon from '../assets/postar.png';
 import fakePosts from '../mock/posts.json';
 import fakeUser from '../mock/user.json';
-import BottomBar from './BottomBar';
 
 const HomePage = () => {
   const [posts, setPosts] = useState(fakePosts);
@@ -75,9 +74,6 @@ const HomePage = () => {
         <img src={postIcon} alt="Postar" className="homepage-newPostButtonIcon" />
       </div>
 
-    <BottomBar user={user}></BottomBar>
-
-      
     </div>
   );
 }

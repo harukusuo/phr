@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AddAnimal.css';
 import Header from './Header';
-import BottomBar from './BottomBar';
 import fakeUser from '../mock/user.json';
 
 const AddAnimal = () => {
@@ -103,8 +102,6 @@ const AddAnimal = () => {
           <button type="submit" className="submit-button">Salvar Animal</button>
         </form>
       </div>
-
-      <BottomBar user={user} />
     </div>
   );
 };

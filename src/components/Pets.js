@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Pets.css';
-import BottomBar from './BottomBar';
 import Header from './Header';
 import missingIcon from '../assets/perdido.png';
 import foundIcon from '../assets/achado.png';
@@ -28,10 +27,10 @@ const Pets = () => {
     <div className="pets-container">
       <Header text="Pets" hasBackButton={false} />
 
-      <div className="content">
+      <div className="pets-content">
         <div className="buttons-container">
           <div className="buttons-pets">
-            <div className="button">
+            <div className="pets-button">
               <div
                 className="petspage-found-button"
                 onClick={handleFoundClick}
@@ -41,7 +40,7 @@ const Pets = () => {
               <p>Animais Encontrados</p>
             </div>
 
-            <div className="button">
+            <div className="pets-button">
               <div
                 className="petspage-missing-button"
                 onClick={handleMissingClick}
@@ -51,7 +50,7 @@ const Pets = () => {
               <p>Animais Perdidos</p>
             </div>
 
-            <div className="button">
+            <div className="pets-button">
               <div className="add-animal-button" onClick={handleAddAnimalClick}>
                 <img src={addIcon} alt="Adicionar Animal" />
               </div>
@@ -73,8 +72,6 @@ const Pets = () => {
           </p>
         </div>
       </div>
-
-      <BottomBar user={user} />
     </div>
   );
 };
