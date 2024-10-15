@@ -1,29 +1,85 @@
-button {
-    height: 200px;
-    width: 200px;
-  }
-  
-  .petspage-missing-button img,
-  .petspage-found-button img {
-    height: 200px;
-    width: 200px;
-  }
-  
-  .buttons-pets {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .add-animal-button {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .add-animal-button img {
-    height: 60px;
-    width: 60px;
-  }
-  
+.pets-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  gap: 40px;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons-pets {
+  display: flex;
+  gap: 40px;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.petspage-missing-button img,
+.petspage-found-button img,
+.add-animal-button img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.petspage-missing-button img:hover,
+.petspage-found-button img:hover,
+.add-animal-button img:hover {
+  transform: scale(1.1);
+}
+
+button p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+.add-animal-button {
+  cursor: pointer;
+}
+
+.info-section {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffefd5;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.info-section h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: #c23131;
+}
+
+.info-section p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 8px;
+}

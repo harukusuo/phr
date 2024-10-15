@@ -1,42 +1,53 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
-import BottomBar from './BottomBar';
 import fakeUser from '../mock/user.json';
 import '../styles/Chat.css';
 import sendIcon from '../assets/enviar.png';
 
 const Chat = () => {
-
     const location = useLocation();
-
     const [messages, setMessages] = useState(location.state.messages);
     const [user, setUser] = useState(fakeUser);
+    const [newMessage, setNewMessage] = useState("");
+    const messagesEndRef = useRef(null);
 
-    // reverse messages
     useEffect(() => {
-        const newMessages = { ...messages };
-        newMessages.messages.reverse();
-        setMessages(newMessages);
-    }, []);
+        scrollToBottom();
+    }, [messages]);
 
-    const title = "Chat com " + messages.user.name;
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
     const renderMessage = (msg, index) => {
-
         const isMyMessage = msg.userId === user.id;
         const style = isMyMessage ? "chat-message-mine" : "chat-message-other";
-
         return (
-            <div key={index} className={"chat-message " + style} >
-                {msg.text}
+            <div key={index} className={"chat-message " + style}>
+                <span className="message-text">{msg.text}</span>
             </div>
         );
-    }
+    };
+
+    const handleSendMessage = () => {
+        if (newMessage.trim() === "") return;
+
+        const newMsg = {
+            text: newMessage,
+            userId: user.id,
+        };
+        setMessages((prev) => ({
+            ...prev,
+            messages: [...prev.messages, newMsg],
+        }));
+        setNewMessage("");
+        scrollToBottom();
+    };
 
     return (
         <div className="chat-container">
-            <Header text={title} hasBackButton={true} />
+            <Header text={`Chat com ${messages.user.name}`} hasBackButton={true} />
 
             <div className="chat-header">
                 <div className="chat-profile-pic">
@@ -49,18 +60,24 @@ const Chat = () => {
 
             <div className="chat-content">
                 {messages.messages.map((msg, index) => renderMessage(msg, index))}
+                <div ref={messagesEndRef} />
             </div>
 
             <div className="chat-message-box">
-                <input type="text" placeholder="Digite sua mensagem" className="chat-message-input"/>
-                <button className="chat-message-send">
+                <input
+                    type="text"
+                    placeholder="Digite sua mensagem"
+                    className="chat-message-input"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                />
+                <button className="chat-message-send" onClick={handleSendMessage}>
                     <img src={sendIcon} alt="Enviar" />
                 </button>
             </div>
-
-            <BottomBar user={user}/>
         </div>
-    )
-}
+    );
+};
 
 export default Chat;

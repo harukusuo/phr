@@ -13,7 +13,6 @@ const Chats = () => {
     const [conversations, setConversations] = useState([]);
 
     useEffect(() => {
-        // TODO fetch messages
         setConversations(fakeConversations);
     }, []);
 
@@ -30,6 +29,7 @@ const Chats = () => {
                     <div key={index} className="chats-message" onClick={() => onConvClick(conv)}>
                         <div className="chats-message-avatar">
                             <img src={conv.user.profilePicture} alt={conv.user.name} />
+                            <span className={`status ${conv.user.isOnline ? 'online' : 'offline'}`}></span>
                         </div>
                         <div className="chats-message-body">
                             <div className="chats-message-user">{conv.user.name} {conv.user.sobrenome}</div>
@@ -39,7 +39,18 @@ const Chats = () => {
                 ))}
             </div>
 
-            <BottomBar user={user}/>
+            <div className="avisos">
+                <h3>Regras do Chat:</h3>
+                <ul>
+                    <li>💬 Tenha respeito por todos no chat.</li>
+                    <li>🙋‍♀️ Do outro lado da tela existe outra pessoa.</li>
+                    <li>🤐 Evite enviar mensagens ofensivas.</li>
+                    <li>🎯 Mantenha o foco na conversa e no tema.</li>
+                    <li>🚫 Não compartilhe informações pessoais.</li>
+                </ul>
+            </div>
+
+            <BottomBar user={user} />
         </div>
     );
 }
