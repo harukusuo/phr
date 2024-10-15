@@ -105,3 +105,48 @@
     font-weight: bold;
     cursor: pointer;
 }
+
+.comment-form {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.comment-submit {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.post-options {
+    position: relative;
+    cursor: pointer;
+}
+
+.delete-menu {
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    margin-top: 8px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.delete-menu span {
+    color: red;
+    cursor: pointer;
+}
+
+.delete-menu span:hover {
+    text-decoration: underline;
+}
