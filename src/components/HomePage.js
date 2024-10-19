@@ -6,11 +6,9 @@ import '../styles/HomePage.css';
 
 import postIcon from '../assets/postar.png';
 import fakePosts from '../mock/posts.json';
-import fakeUser from '../mock/user.json';
 
-const HomePage = () => {
+const HomePage = (user, token) => {
   const [posts, setPosts] = useState(fakePosts);
-  const [user, setUser] = useState(fakeUser);
 
   // NEW POST
   const [newPostModalOpen, setNewPostModalOpen] = useState(false);

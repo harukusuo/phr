@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import SideBar from './SideBar';
 import BottomBar from './BottomBar';
 
-function NavBar() {
+function NavBar({ user }) {
 
     // Define quais rotas devem ter a barra
     const routesWithNavbar = [
@@ -51,8 +51,8 @@ function NavBar() {
 
     return (
         <div>
-            {sideBarVisible && <SideBar />}
-            {bottomBarVisible && <BottomBar />}
+            {sideBarVisible && <SideBar user={user}/>}
+            {bottomBarVisible && <BottomBar user={user}/>}
         </div>
     )
 }

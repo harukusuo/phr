@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import WelcomeScreen from './components/WelcomeScreen';
 import LoginScreen from './components/Login';
@@ -15,14 +15,52 @@ import AddAnimal from './components/AddAnimal';
 import NavBar from './components/NavBar';
 
 function App() {
+
+    const [user, setUser] = useState(null);
+    const [token, setToken] = useState(null);
+
+    // useEffect para obter usuário e token do local storage
+    useEffect(() => {
+        const user = localStorage.getItem('user');
+        const token = localStorage.getItem('token');
+
+        if (user) {
+            console.log('Usuário obtido do local storage:');
+            console.log(user);
+            setUser(JSON.parse(user));
+        }
+
+        if (token) {
+            setToken(token);
+        }
+    }, []);
+
+
+    // useEffect para armazenar usuário e token no local storage
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('user');
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (token) {
+            localStorage.setItem('token', token); 
+        } else {
+            localStorage.removeItem('token');
+        }
+    }, [token]);
+
     return (
     <Router basename="/phr">
       <div className="App">
-        <NavBar/>
+        <NavBar user={user}/>
         <Routes>
           <Route path="/" element={<WelcomeScreen />} />
-          <Route path="/login" element={<LoginScreen />} />
-          <Route path="/homepage" element={<HomePage />} />
+          <Route path="/login" element={<LoginScreen setUser={setUser} setToken={setToken}/>} />
+          <Route path="/homepage" element={<HomePage user={user} token={token}/>} />
           <Route path="/search/:query?" element={<SearchPage />} />
           <Route path="/pets" element={<Pets />} />
           <Route path="/perdidos" element={<Perdidos />} />

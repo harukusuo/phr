@@ -15,10 +15,15 @@ const Cadastro = () => {
   const [passwordError2, setPasswordError2] = useState('');
   const navigate = useNavigate();
 
-  const handleSignup = () => {
+  async function handleSignup() {
     setEmailError('');
     setPasswordError('');
     setPasswordError2('');
+
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+      setEmailError('Por favor, preencha todos os campos.');
+      return;
+    }
 
     if (!email.endsWith('@gmail.com') && !email.endsWith('@outlook.com') && !email.endsWith('@educar.rs.gov.br.com') && !email.endsWith('@yahoo.com') && !email.endsWith('@hotmail.com')) {
       setEmailError('Por favor, insira um e-mail válido.');
@@ -35,12 +40,34 @@ const Cadastro = () => {
       return;
     }
 
-    if (firstName && lastName && email && password === confirmPassword) {
-      setSignupSuccess(true);
+    try {
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: firstName,
+          surname: lastName,
+          email: email,
+          password: password,
+        }),
+      });
+      const data = await res.json();
+      
+      if (data.error !== undefined) {
+        setEmailError('Este e-mail já está em uso.');
+        return;
+      }
 
+      setSignupSuccess(true);
       setTimeout(() => {
         navigate('/login');
       }, 2000); 
+
+    } catch (err) {
+      console.error(err);
+      setSignupSuccess(false);
     }
   };
 

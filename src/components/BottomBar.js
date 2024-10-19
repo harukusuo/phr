@@ -7,7 +7,7 @@ import profileIcon from '../assets/perfil.png';
 import petsIcon from '../assets/pets.png';
 import '../styles/BottomBar.css';
 
-const BottomBar = ({user}) => {
+const BottomBar = ({ user }) => {
 
     const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const BottomBar = ({user}) => {
     };
 
     const handleProfilePress = () => {
-        navigate(`/profile/${user.id}`);
+        navigate(`/profile/${user._id}`);
     };
 
     const [activeButton, setActiveButton] = useState(null);

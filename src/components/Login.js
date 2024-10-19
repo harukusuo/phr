@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import loginImage from '../assets/loginIMG.png';
 import Header from './Header';
+import User from '../models/user';
 
-const Login = () => {
+const Login = ({ setUser, setToken }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
@@ -12,9 +13,15 @@ const Login = () => {
   const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  async function handleLogin() {
     setEmailError('');
     setPasswordError('');
+
+    if (!email || !password) {
+      setEmailError('Por favor, insira um e-mail.');
+      setPasswordError('Por favor, insira uma senha.');
+      return;
+    }
 
     // valida email
     if (!email.endsWith('@gmail.com') && !email.endsWith('@outlook.com') && !email.endsWith('@educar.rs.gov.br.com') && !email.endsWith('@yahoo.com') && !email.endsWith('@hotmail.com')) {
@@ -28,20 +35,60 @@ const Login = () => {
       return;
     }
 
-    // login bem-sucedido
-    if (email && password) {
+    // faz login
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (res.status === 400) {
+        setEmailError('E-mail não cadastrado.');
+        setPasswordError('Senha incorreta.');
+        setLoginSuccess(false);
+        return;
+      }
+
+      const data = await res.json();
+
+      if (data.error) {
+        setEmailError('E-mail não cadastrado.');
+        setPasswordError('Senha incorreta.');
+        setLoginSuccess(false);
+        return;
+      }
+
+      // salva o token
+      setToken(data.token);
+
+      const user = new User(data.user._id, data.user.name, data.user.surname, data.user.profilePic);
+      setUser(user);
+
       setLoginSuccess(true);
-      
+
       setTimeout(() => {
         navigate('/homepage');
       }, 2000);
+
+    } catch (err) {
+      console.error(err);
+      setLoginSuccess(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleLogin();
     }
   };
 
   return (
     <div className="login-container">
-      <Header text="Login"/>
-      
+      <Header text="Login" />
+
       <div className="login-welcomeMessage">Que bom te ver novamente!</div>
 
       <img src={loginImage} alt="Imagem de Bem-Vindo" className="login-welcomeImage" />
@@ -67,6 +114,7 @@ const Login = () => {
           placeholder="Senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          onKeyPress={handleKeyPress}
           style={{ borderRadius: '15px' }}
         />
         <p className="login-errorMessage">{passwordError}</p>
