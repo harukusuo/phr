@@ -7,6 +7,11 @@
   background-color: #f7f9fc;
 }
 
+@media (min-width: 768px) {
+  .adjusted-container {
+    padding-left: 250px; /* Ajuste conforme a largura da SideBar */
+  }
+}
 .chats-messages {
   display: flex;
   flex-direction: column;

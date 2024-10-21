@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import loginImage from '../assets/loginIMG.png';
@@ -12,6 +12,7 @@ const Login = ({ setUser, setToken }) => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const navigate = useNavigate();
+  const successMessageRef = useRef(null);
 
   async function handleLogin() {
     setEmailError('');
@@ -68,6 +69,7 @@ const Login = ({ setUser, setToken }) => {
       setUser(user);
 
       setLoginSuccess(true);
+      successMessageRef.current.scrollIntoView({ behavior: 'smooth' });
 
       setTimeout(() => {
         navigate('/homepage');
@@ -124,9 +126,13 @@ const Login = ({ setUser, setToken }) => {
         <span className="login-buttonText">Entrar</span>
       </div>
 
-      {loginSuccess && <p className="login-successMessage">Login bem-sucedido!</p>}
-      <hr></hr>
-      <hr></hr>
+      {loginSuccess && (
+        <div ref={successMessageRef} className="login-successMessage">
+          <br></br>
+          Login realizado com sucesso!
+          <br></br>
+        </div>
+        )}
     </div>
   );
 };

@@ -21,7 +21,7 @@ const Chats = () => {
     }
 
     return (
-        <div className="chats-container">
+        <div className="chats-container adjusted-container">
             <Header text="Chats" hasBackButton={false} />
 
             <div className="chats-messages">
@@ -49,8 +49,6 @@ const Chats = () => {
                     <li>🚫 Não compartilhe informações pessoais.</li>
                 </ul>
             </div>
-
-            <BottomBar user={user} />
         </div>
     );
 }
