@@ -8,6 +8,11 @@ import '../styles/Profile.css';
 
 const Profile = () => {
 
+    const handleSendMessage = () => {
+        // Lógica para enviar mensagem
+        console.log('Enviar mensagem para', user.name);
+      };
+
     const [user, setUser] = useState({});
     const [posts, setPosts] = useState([]);
 
@@ -38,9 +43,10 @@ const Profile = () => {
                     <div className='profile-content-info-header'>
                         <span className="profile-username">{user.name} {user.sobrenome}</span>
                     </div>
-                    <div className='profile-content-info-body'> 
-                        <span className="profile-follow">{user.followers} seguidores</span>
-                        <span className="profile-follow">{user.following} seguindo</span>
+                    <div className='profile-content-info-body'>
+                        <button className="send-message-button" onClick={handleSendMessage}>
+                            <span className="material-symbols-outlined">mail</span> Enviar Mensagem
+                        </button>
                     </div>
                 </div>
                 <div className='profile-content-image'>

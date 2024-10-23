@@ -68,3 +68,25 @@
     width: 100%;
     padding-bottom: 72px; /* bottom bar + normal padding */
 }
+
+.send-message-button {
+    display: flex;
+    align-items: center;
+    background-color: #DD6A00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .send-message-button .material-symbols-outlined {
+    margin-right: 8px;
+  }
+  
+  .send-message-button:hover {
+    background-color: #bd5d02;
+  }
