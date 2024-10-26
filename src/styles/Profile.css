@@ -16,6 +16,7 @@
     width: 100%;
     max-width: 500px;
     margin-top: 20px;
+    margin-left: 20px;
 }
 
 .profile-content-info {
@@ -53,6 +54,22 @@
     margin-bottom: 20px;
 }
 
+@media (max-width: 768px) {
+    .profile-content-image img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 2px solid #DD6A00;
+        object-fit: cover;
+        margin-bottom: 20px;
+        margin-right: 20px;
+    }
+
+    .send-message-button {
+        max-width: 13rem;
+      }
+  }
+
 .profile-posts {
     width: 100%;
     max-width: 500px;
@@ -66,7 +83,7 @@
     justify-content: flex-start;
     gap: 10px;
     width: 100%;
-    padding-bottom: 72px; /* bottom bar + normal padding */
+    padding-bottom: 72px;
 }
 
 .send-message-button {
@@ -75,12 +92,13 @@
     background-color: #DD6A00;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     font-weight: bold;
     margin-top: 10px;
+    max-width: 12.7rem;
   }
   
   .send-message-button .material-symbols-outlined {

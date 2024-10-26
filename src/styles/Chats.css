@@ -9,7 +9,7 @@
 
 @media (min-width: 768px) {
   .adjusted-container {
-    padding-left: 250px; /* Ajuste conforme a largura da SideBar */
+    padding-left: 250px;
   }
 }
 .chats-messages {

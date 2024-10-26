@@ -10,6 +10,7 @@ function NavBar({ user }) {
     const routesWithNavbar = [
         '/homepage',
         '/search',
+        '/search/:query?',
         '/pets',
         '/chats',
         '/profile/:id',
@@ -23,7 +24,13 @@ function NavBar({ user }) {
     const [bottomBarVisible, setBottomBarVisible] = useState(false);
 
     const updateNavBarsVisibility = () => {
-        if (routesWithNavbar.includes(location.pathname)) {
+        const currentPath = location.pathname;
+        const isRouteWithNavbar = routesWithNavbar.some(route => {
+            const regex = new RegExp(`^${route.replace(/:\w+\??/, '.*')}$`);
+            return regex.test(currentPath);
+        });
+
+        if (isRouteWithNavbar) {
             if (window.innerWidth < 1080) {
                 setSideBarVisible(false);
                 setBottomBarVisible(true);
@@ -43,7 +50,6 @@ function NavBar({ user }) {
 
     useEffect(() => {
         window.addEventListener('resize', updateNavBarsVisibility);
-        updateNavBarsVisibility();
         return () => {
             window.removeEventListener('resize', updateNavBarsVisibility);
         };
@@ -56,6 +62,5 @@ function NavBar({ user }) {
         </div>
     )
 }
-
 
 export default NavBar;
