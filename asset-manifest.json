@@ -1,21 +1,25 @@
 {
   "files": {
-    "main.css": "/phr/static/css/main.2a13c6fb.css",
-    "main.js": "/phr/static/js/main.e286661d.js",
+    "main.css": "/phr/static/css/main.0c546a36.css",
+    "main.js": "/phr/static/js/main.6e376b88.js",
+    "static/media/perdido.png": "/phr/static/media/perdido.e347a0acef5cdd04ae0f.png",
     "static/media/loginIMG.png": "/phr/static/media/loginIMG.22f85f20da40308d49bc.png",
     "static/media/searching.png": "/phr/static/media/searching.f16958af6ef43a730199.png",
     "static/media/enviar.png": "/phr/static/media/enviar.1a9654352414af81123f.png",
+    "static/media/achado.png": "/phr/static/media/achado.78c48a0415f921376580.png",
+    "static/media/pets.png": "/phr/static/media/pets.bd971514b8fefa2eaf6c.png",
     "static/media/chats.png": "/phr/static/media/chats.c1ea29e643060ecb442c.png",
     "static/media/buscar.png": "/phr/static/media/buscar.60497d224d4b6793f9f2.png",
+    "static/media/add.png": "/phr/static/media/add.4415c9824bd188a5d0a9.png",
     "static/media/perfil.png": "/phr/static/media/perfil.043529b355b9994761b3.png",
     "static/media/postar.png": "/phr/static/media/postar.36f6395bb4ac09d68513.png",
     "static/media/home.png": "/phr/static/media/home.015f2ab4b85387d51daa.png",
     "index.html": "/phr/index.html",
-    "main.2a13c6fb.css.map": "/phr/static/css/main.2a13c6fb.css.map",
-    "main.e286661d.js.map": "/phr/static/js/main.e286661d.js.map"
+    "main.0c546a36.css.map": "/phr/static/css/main.0c546a36.css.map",
+    "main.6e376b88.js.map": "/phr/static/js/main.6e376b88.js.map"
   },
   "entrypoints": [
-    "static/css/main.2a13c6fb.css",
-    "static/js/main.e286661d.js"
+    "static/css/main.0c546a36.css",
+    "static/js/main.6e376b88.js"
   ]
 }
