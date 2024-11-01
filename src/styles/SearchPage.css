@@ -59,21 +59,23 @@
     width: 350px;
 }
 
-.searchpage-pic-container {
-    background-color: #fff;
-    border-radius: 50%;
-}
-
-.searchpage-profile-pic {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
 .searchpage-username {
     font-size: 1.2rem;
     font-weight: bold;
     color: #333;
+}
+
+.searchpage-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Alinhar na parte inferior */
+    height: 100%;
+    margin-bottom: 2em; /* Adicionar margem inferior */
+}
+
+.searchpage-placeholder img {
+    width: 80%; /* Ajustar o tamanho da imagem */
+    max-width: 300px; /* Definir um tamanho máximo */
 }
 
 @media (max-width: 600px) {

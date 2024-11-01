@@ -4,6 +4,7 @@ import Header from './Header';
 import fakeUser from '../mock/user.json';
 import '../styles/Chat.css';
 import sendIcon from '../assets/enviar.png';
+import ProfilePic from './ProfilePic'; // Importar o novo componente
 
 const Chat = () => {
     const location = useLocation();
@@ -51,7 +52,7 @@ const Chat = () => {
 
             <div className="chat-header">
                 <div className="chat-profile-pic">
-                    <img src={messages.user.profilePicture} alt={messages.user.name} />
+                    <ProfilePic src={messages.user.profilePicture} alt={messages.user.name} /> {/* Usar o novo componente */}
                 </div>
                 <div className="chat-profile-name">
                     {messages.user.name} {messages.user.sobrenome}

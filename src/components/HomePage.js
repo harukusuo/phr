@@ -1,14 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Posts from './Posts';
 import NewPost from './NewPost';
 import Header from './Header';
 import '../styles/HomePage.css';
 
 import postIcon from '../assets/postar.png';
-import fakePosts from '../mock/posts.json';
 
-const HomePage = (user, token) => {
-  const [posts, setPosts] = useState(fakePosts);
+const HomePage = ({ user, token }) => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const response = await fetch('/api/posts', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Erro ao buscar posts');
+        }
+
+        const data = await response.json();
+        const formattedPosts = data.map(post => ({
+          id: post._id,
+          user: post.user,
+          content: post.text,
+          time: new Date(post.createdAt),
+          likes: post.likes.length,
+          likedByUser: post.likes.includes(user._id),
+          comments: post.comments
+        }));
+
+        // Ordene os posts por data, do mais recente para o mais antigo
+        formattedPosts.sort((a, b) => b.time - a.time);
+
+        setPosts(formattedPosts);
+      } catch (error) {
+        console.error('Erro ao buscar posts:', error);
+      }
+    };
+
+    fetchPosts();
+  }, [token]);
 
   // NEW POST
   const [newPostModalOpen, setNewPostModalOpen] = useState(false);
@@ -22,42 +57,104 @@ const HomePage = (user, token) => {
     setNewPostModalOpen(false);
   };
 
-  const handleFormSubmit = (data) => {
-    handleNewPostModalClose(false);
+  const handleFormSubmit = async (data) => {
+    handleNewPostModalClose();
 
-    // TODO CALL API TO POST
-    console.log('Post enviado', data);
+    try {
+      const response = await fetch('/api/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          text: data.content,
+          user: user._id
+        })
+      });
 
-    setPosts([
-      {
-        id: posts.length + 1,
-        owner: user,
-        content: data.content,
-        time: Date.now(),
-        likes: 0,
-        comments: []
-      },
-      ...posts
-    ]);
+      if (!response.ok) {
+        throw new Error('Erro ao adicionar post');
+      }
+
+      const newPost = await response.json();
+
+      setPosts([
+        {
+          id: newPost._id,
+          user: user,
+          content: newPost.text,
+          time: new Date(newPost.createdAt),
+          likes: newPost.likes.length,
+          comments: newPost.comments
+        },
+        ...posts
+      ]);
+    } catch (error) {
+      console.error('Erro ao adicionar post:', error);
+    }
   };
 
-  // END NEW POST
+  const handleDeletePost = async (postId) => {
+    try {
+        const response = await fetch(`/api/posts/${postId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Erro ao deletar post');
+        }
+        setPosts(posts.filter(post => post.id !== postId));
+    } catch (error) {
+        console.error('Erro ao deletar post:', error);
+    }
+  };
 
+  const handleLikePost = async (postId, isLiked) => {
+    try {
+        const response = await fetch(`/api/posts/${postId}/like`, {
+            method: isLiked ? 'DELETE' : 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`Erro ao ${isLiked ? 'descurtir' : 'curtir'} post`);
+        }
+        const updatedPost = await response.json();
+        setPosts(posts.map(post => post.id === postId ? { ...post, likes: updatedPost.likes.length } : post));
+    } catch (error) {
+        console.error(`Erro ao ${isLiked ? 'descurtir' : 'curtir'} post:`, error);
+    }
+  };
 
-  /*
-  useEffect(() => {
-    fetch('TODO')
-      .then(response => response.json())
-      .then(data => setPosts(data)) // TODO sort by time
-  }, []);*/
-
-
+  const handleAddComment = async (postId, commentText) => {
+    try {
+        const response = await fetch(`/api/posts/${postId}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ text: commentText })
+        });
+        if (!response.ok) {
+            throw new Error('Erro ao adicionar comentário');
+        }
+        const updatedPost = await response.json();
+        setPosts(posts.map(post => post.id === postId ? { ...post, comments: updatedPost.comments } : post));
+    } catch (error) {
+        console.error('Erro ao adicionar comentário:', error);
+    }
+  };
 
   return (
     <div className="homepage-container">
       <Header text="Home" hasBackButton={false} />
 
-      <Posts posts={posts} />
+      <Posts posts={posts} onDelete={handleDeletePost} onLike={handleLikePost} onAddComment={handleAddComment} />
 
       <NewPost
         isOpen={newPostModalOpen}

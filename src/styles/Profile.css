@@ -46,8 +46,6 @@
 }
 
 .profile-content-image img {
-    width: 150px;
-    height: 150px;
     border-radius: 50%;
     border: 2px solid #DD6A00;
     object-fit: cover;
@@ -56,19 +54,12 @@
 
 @media (max-width: 768px) {
     .profile-content-image img {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 2px solid #DD6A00;
-        object-fit: cover;
-        margin-bottom: 20px;
         margin-right: 20px;
     }
-
     .send-message-button {
         max-width: 13rem;
-      }
-  }
+    }
+}
 
 .profile-posts {
     width: 100%;
@@ -99,12 +90,80 @@
     font-weight: bold;
     margin-top: 10px;
     max-width: 12.7rem;
-  }
-  
-  .send-message-button .material-symbols-outlined {
+}
+
+.send-message-button .material-symbols-outlined {
     margin-right: 8px;
-  }
-  
-  .send-message-button:hover {
+}
+
+.send-message-button:hover {
     background-color: #bd5d02;
-  }
+}
+
+.profile-content-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.profile-content-info-header .profile-username {
+    margin-bottom: 10px;
+}
+
+.profile-content-info-header .send-message-button {
+    margin-top: 0;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.profile-content-info-header .profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Adicione este estilo para tornar o ponteiro clicável */
+.profile-content-info-header label {
+    cursor: pointer;
+}
+
+.profile-tabs {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.profile-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #DD6A00;
+    border: none;
+    background: none;
+    outline: none;
+    position: relative;
+}
+
+.profile-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #DD6A00;
+}
+
+.empty-message {
+    text-align: center;
+    font-weight: bold;
+    color: #666;
+    margin-top: 20px;
+}
+
+.empty-message img {
+    display: block;
+    margin: 20px auto;
+    max-width: 200px; /* Aumente o tamanho da imagem */
+}

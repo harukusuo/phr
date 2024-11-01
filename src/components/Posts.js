@@ -2,15 +2,17 @@ import React from "react";
 import Post from "./Post";
 import "../styles/Posts.css";
 
-const Posts = ({ posts, onDelete }) => {
+const Posts = ({ posts, onDelete, onLike, onAddComment }) => {
     return (
         <div className="posts-container">
-            {posts.map((postData, index) => (
+            {posts.map((postData) => (
                 <Post 
-                    key={index} 
-                    user={postData.owner} 
+                    key={postData.id} 
+                    user={postData.user} 
                     post={postData} 
-                    onDelete={onDelete}
+                    onDelete={onDelete} 
+                    onLike={onLike} 
+                    onAddComment={onAddComment} 
                 />
             ))}
         </div>

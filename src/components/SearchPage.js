@@ -3,15 +3,15 @@ import Header from './Header'
 import BottomBar from './BottomBar'
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import fakeUser from '../mock/user.json'
-import fakeUsers from '../mock/users.json'
 import searchIcon from '../assets/searching.png'
+import lookingPets from '../assets/looking_pets.png' // Importar a imagem
+import ProfilePic from './ProfilePic' // Importar o novo componente
 
 const SearchPage = () => {
     const navigate = useNavigate();
     const { query } = useParams();
 
-    const [user, setUser] = useState(fakeUser);
+    const [user, setUser] = useState(null);
     const [search, setSearch] = useState('');
 
     const [users, setUsers] = useState([]);
@@ -28,18 +28,22 @@ const SearchPage = () => {
     }
 
     useEffect(() => {
-        if(search.length > 0) {
-            // TODO replace by API call
-            const filteredUsers = fakeUsers.filter((user) => {
-                const fullName = `${user.name} ${user.sobrenome}`.toLowerCase();
-                return fullName.includes(search.toLowerCase());
-            });
-            setUsers(filteredUsers);
-        } else {
-            setUsers([]);
-        }
-    }, [search]);
+        const fetchUsers = async () => {
+            if(search.length > 0) {
+                try {
+                    const response = await fetch(`/api/users/search?query=${search}`);
+                    const data = await response.json();
+                    setUsers(data);
+                } catch (error) {
+                    console.error('Erro ao buscar usuários:', error);
+                }
+            } else {
+                setUsers([]);
+            }
+        };
 
+        fetchUsers();
+    }, [search]);
 
     const handleUserClick = (userId) => {
         navigate(`/profile/${userId}`);
@@ -56,16 +60,22 @@ const SearchPage = () => {
                 </button>
             </div>
 
-            <div className="searchpage-results">
-                {users.map((user, index) => (
-                    <div key={index} className="searchpage-result" onClick={() => handleUserClick(user.id)}>
-                        <div className="searchpage-pic-container">
-                            <img src={user.profilePicture} alt={`${user.name}'s profile`} className="searchpage-profile-pic"/>
+            {search.length === 0 ? (
+                <div className="searchpage-placeholder">
+                    <img src={lookingPets} alt="Looking for pets" />
+                </div>
+            ) : (
+                <div className="searchpage-results">
+                    {users.map((user, index) => (
+                        <div key={index} className="searchpage-result" onClick={() => handleUserClick(user._id)}>
+                            <div className="searchpage-pic-container">
+                                <ProfilePic src={user.profilePic} alt={`${user.name}'s profile`} className="searchpage-profile-pic" width={60} height={60}/> {/* Usar o novo componente */}
+                            </div>
+                            <div className="searchpage-username">{user.name} {user.surname}</div>
                         </div>
-                        <div className="searchpage-username">{user.name} {user.sobrenome}</div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

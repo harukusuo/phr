@@ -5,6 +5,7 @@ import fakeUser from '../mock/user.json'
 import fakeConversations from '../mock/conversations.json'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ProfilePic from './ProfilePic'; // Importar o novo componente
 
 const Chats = () => {
 
@@ -28,7 +29,7 @@ const Chats = () => {
                 {conversations.map((conv, index) => (
                     <div key={index} className="chats-message" onClick={() => onConvClick(conv)}>
                         <div className="chats-message-avatar">
-                            <img src={conv.user.profilePicture} alt={conv.user.name} />
+                            <ProfilePic src={conv.user.profilePicture} alt={conv.user.name} /> {/* Usar o novo componente */}
                             <span className={`status ${conv.user.isOnline ? 'online' : 'offline'}`}></span>
                         </div>
                         <div className="chats-message-body">

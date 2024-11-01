@@ -2,11 +2,11 @@ import "../styles/Post.css";
 import { useNavigate } from "react-router-dom";
 import Colapsavel from "./Colapsavel";
 import { useState } from "react";
+import ProfilePic from './ProfilePic';
 
 function timeSince(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
     const interval = seconds / 31536000;
-
     if (interval >= 1) {
         return Math.floor(interval) === 1 ? "1 ano" : Math.floor(interval) + " anos";
     }
@@ -29,9 +29,11 @@ function timeSince(date) {
     return Math.floor(seconds) === 1 ? "1 segundo" : Math.floor(seconds) + " segundos";
 }
 
-const Post = ({ user, post, onDelete }) => {
+const Post = ({ user, post, onDelete, onLike, onAddComment }) => {
     const navigate = useNavigate();
-    const [isLiked, setIsLiked] = useState(false);
+    const loggedInUserId = JSON.parse(localStorage.getItem('user'))._id; // Obter o ID do usuário logado
+    const [isLiked, setIsLiked] = useState(post.likedByUser);
+    const [likesCount, setLikesCount] = useState(post.likes);
     const [newComment, setNewComment] = useState("");
     const [comments, setComments] = useState(post.comments);
     const [showDeleteMenu, setShowDeleteMenu] = useState(false);
@@ -40,28 +42,22 @@ const Post = ({ user, post, onDelete }) => {
         navigate(`/profile/${userId}`);
     };
 
-    const handleLikeClick = () => {
-        setIsLiked(!isLiked); // muda entre curtido/n curtido
+    const handleLikeClick = async () => {
+        await onLike(post.id, isLiked);
+        setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
+        setIsLiked(!isLiked);
     };
 
     const handleCommentChange = (event) => {
         setNewComment(event.target.value);
     };
 
-    const handleCommentSubmit = (event) => {
+    const handleCommentSubmit = async (event) => {
         event.preventDefault();
         if (newComment.trim() !== "") {
-            const newCommentData = {
-                id: comments.length + 1,
-                content: newComment,
-                user: {
-                    id: user.id,
-                    name: user.name,
-                    sobrenome: user.sobrenome,
-                    profilePicture: user.profilePicture,
-                },
-            };
-            setComments([...comments, newCommentData]);
+            await onAddComment(post.id, newComment);
+            const loggedInUser = JSON.parse(localStorage.getItem('user'));
+            setComments([...comments, { text: newComment, user: { _id: loggedInUser._id, name: loggedInUser.name, surname: loggedInUser.surname, profilePic: loggedInUser.profilePic } }]);
             setNewComment("");
         }
     };
@@ -75,21 +71,23 @@ const Post = ({ user, post, onDelete }) => {
     return (
         <div className="post">
             <div className="post-header">
-                <div className="post-profile-pic-container" onClick={() => handleUserClick(user.id)}>
-                    <img src={user.profilePicture} alt={`${user.name}'s profile`} className="post-profile-pic" />
+                <div className="post-profile-pic-container" onClick={() => handleUserClick(user._id)}>
+                    <ProfilePic src={user?.profilePic} alt={`${user?.name}'s profile`} className="post-profile-pic" width={50} height={50} />
                 </div>
                 <div className="post-header-info">
-                    <span className="post-header-info-username" onClick={() => handleUserClick(user.id)}>{user.name} {user.sobrenome}</span>
-                    <span className="post-header-info-time" title={new Date(post.time).toLocaleString()}>{timeSince(new Date(post.time))} atrás</span>
+                    <span className="post-header-info-username" onClick={() => handleUserClick(user._id)}>{user?.name} {user?.surname}</span>
+                    <span className="post-header-info-time" title={new Date(post.time).toLocaleString()}>{timeSince(post.time)} atrás</span>
                 </div>
-                <div className="post-options">
-                    <span className="material-symbols-outlined" onClick={() => setShowDeleteMenu(!showDeleteMenu)}>more_vert</span>
-                    {showDeleteMenu && (
-                        <div className="delete-menu">
-                            <span onClick={handleDeleteClick}>Excluir post</span>
-                        </div>
-                    )}
-                </div>
+                {loggedInUserId === user._id && ( // Mostrar os três pontinhos apenas para os posts do usuário logado
+                    <div className="post-options">
+                        <span className="material-symbols-outlined" onClick={() => setShowDeleteMenu(!showDeleteMenu)}>more_vert</span>
+                        {showDeleteMenu && (
+                            <div className="delete-menu">
+                                <span onClick={handleDeleteClick}>Excluir post</span>
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
             <div className="post-content">
                 <p>{post.content}</p>
@@ -99,29 +97,30 @@ const Post = ({ user, post, onDelete }) => {
                     <span className="material-symbols-outlined like-icon">
                         {isLiked ? 'heart_check' : 'heart_plus'}
                     </span>
-                    <span>{post.likes + (isLiked ? 1 : 0)} likes</span>
+                    <span>{likesCount} likes</span>
                 </div>
             </div>
 
-            <Colapsavel title="Comentários">
-                <div className="post-comments">
-                    {comments.length > 0 ? (
-                        comments.map(comment => (
-                            <div key={comment.id} className="comment">
-                                <div className="comment-profile-pic-container" onClick={() => handleUserClick(comment.user.id)}>
-                                    <img src={comment.user.profilePicture} alt={`${comment.user.name} ${comment.user.sobrenome}'s profile`} className="comment-profile-pic" />
+            {comments.length > 0 ? (
+                <Colapsavel title={<div className="colapsavel-title">Comentários</div>}>
+                    <div className="post-comments">
+                        {comments.map(comment => (
+                            <div key={comment._id} className="comment">
+                                <div className="comment-profile-pic-container" onClick={() => handleUserClick(comment.user._id)}>
+                                    <ProfilePic src={comment.user?.profilePic} alt={`${comment.user?.name} ${comment.user?.surname}'s profile`} className="comment-profile-pic" width={30} height={30} />
                                 </div>
                                 <div>
-                                    <span className="comment-profile-username-container" onClick={() => handleUserClick(comment.user.id)}>{comment.user.name} {comment.user.sobrenome}</span>: {comment.content}
+                                    <span className="comment-profile-username-container" onClick={() => handleUserClick(comment.user._id)}>{comment.user?.name} {comment.user?.surname}</span>: {comment.text}
                                 </div>
                             </div>
-                        ))
-                    ) : (
-                        <div className="post-sem">Sem comentários</div>
-                    )}
+                        ))}
+                    </div>
+                </Colapsavel>
+            ) : (
+                <div className="post-sem-container">
+                    <div className="post-sem">Sem comentários</div>
                 </div>
-            </Colapsavel>
-
+            )}
             <form onSubmit={handleCommentSubmit} className="comment-form">
                 <input
                     type="text"

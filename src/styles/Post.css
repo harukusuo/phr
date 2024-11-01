@@ -34,6 +34,7 @@
 .post-profile-pic-container {
     background-color: #fff;
     margin-right: 12px;
+    overflow: hidden; /* Adicionado para garantir que a imagem não ultrapasse o contêiner */
 }
 
 .post-profile-pic,
@@ -42,6 +43,12 @@
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
+    object-fit: cover; /* Adicionado para garantir que a imagem se ajuste ao contêiner */
+}
+
+.post-profile-pic {
+    width: 45px; /* Ajuste o tamanho da imagem para ser menor que o contêiner */
+    height: 45px; /* Ajuste o tamanho da imagem para ser menor que o contêiner */
 }
 
 .post-content {
@@ -57,9 +64,15 @@
     color: #555;
 }
 
+.post-sem-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
 .post-sem {
-    align-self: flex-end;
-    margin-right: 1rem;
+    font-weight: bold;
+    color: #666;
 }
 
 .like-container {
@@ -149,4 +162,13 @@
 
 .delete-menu span:hover {
     text-decoration: underline;
+}
+
+.colapsavel-title {
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
 }

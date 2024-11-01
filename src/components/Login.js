@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
 import loginImage from '../assets/loginIMG.png';
@@ -14,7 +14,14 @@ const Login = ({ setUser, setToken }) => {
   const navigate = useNavigate();
   const successMessageRef = useRef(null);
 
-  async function handleLogin() {
+  useEffect(() => {
+    if (loginSuccess && successMessageRef.current) {
+      successMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [loginSuccess]);
+
+  async function handleLogin(event) {
+    event.preventDefault();
     setEmailError('');
     setPasswordError('');
 
@@ -69,9 +76,13 @@ const Login = ({ setUser, setToken }) => {
       setUser(user);
 
       setLoginSuccess(true);
-      successMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+      const errorElement = document.getElementById('error-message');
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth' });
+      }
 
       setTimeout(() => {
+        window.scrollTo(0, 0); // Reseta o scroll para o topo antes de navegar
         navigate('/homepage');
       }, 2000);
 
@@ -83,7 +94,7 @@ const Login = ({ setUser, setToken }) => {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleLogin();
+      handleLogin(e); // Passar o evento corretamente
     }
   };
 

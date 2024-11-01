@@ -18,6 +18,7 @@ const SideBar = ({ user }) => {
         <button onClick={() => handleNavigation('/pets')}>Pets</button>
         <button onClick={() => handleNavigation('/chats')}>Chats</button>
         <button onClick={() => handleNavigation(`/profile/${user._id}`)}>Meu Perfil</button>
+        <button className="logout-button" onClick={() => handleNavigation('/')}>Sair</button>
       </nav>
     </div>
   );
