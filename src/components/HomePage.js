@@ -11,7 +11,13 @@ const HomePage = ({ user, token }) => {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      if (!token) {
+        console.error('Token não fornecido');
+        return;
+      }
+
       try {
+        console.log('Token:', token); // Adiciona um log para verificar o token
         const response = await fetch('/api/posts', {
           headers: {
             'Authorization': `Bearer ${token}`

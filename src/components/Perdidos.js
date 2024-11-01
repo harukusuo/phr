@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 import '../styles/Perdidos.css';
+import PetCard from './PetCard';
 
 const Perdidos = () => {
     const [pets, setPets] = useState([]);
@@ -46,16 +47,12 @@ const Perdidos = () => {
 
             <div className="pets-grid">
                 {pets.map((pet, index) => (
-                    <div key={index} className="pet-card">
-                        <img src={pet.picture} alt={pet.name} className="pet-image" />
-                        <div className="pet-info">
-                            <h3>{pet.name} - {pet.type}</h3>
-                            <p><strong>Descrição:</strong> {pet.description}</p>
-                            <p><strong>Local:</strong> {pet.location}, {pet.city}</p>
-                            <p><strong>Responsável:</strong> {pet.user.name} {pet.user.surname}</p>
-                        </div>
-                        <button className="found-button" onClick={() => handleFoundClick(pet)}>Encontrei!</button>
-                    </div>
+                    <PetCard
+                        key={index}
+                        pet={pet}
+                        type="lost"
+                        onActionClick={handleFoundClick}
+                    />
                 ))}
             </div>
         </div>

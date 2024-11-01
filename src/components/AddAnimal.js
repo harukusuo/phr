@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../styles/AddAnimal.css';
 import Header from './Header';
 import fakeUser from '../mock/user.json';
 import addPic from '../assets/add_pic.png';
 
-const AddAnimal = () => {
+const AddAnimal = ({user}) => {
   const navigate = useNavigate();
-  const [user] = useState(fakeUser);
 
   const [animalData, setAnimalData] = useState({
     name: '',
@@ -16,6 +16,7 @@ const AddAnimal = () => {
     city: '',
     local: '',
     status: 'Encontrado',
+    photo: null,
   });
 
   const handleInputChange = (e) => {
@@ -23,13 +24,60 @@ const AddAnimal = () => {
     setAnimalData({ ...animalData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    setAnimalData({ ...animalData, photo: e.target.files[0] });
+  };
+
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Dados do animal:', animalData);
-    if (animalData.status === 'Encontrado') {
-      navigate(`/Achados`);
-    } else {
-      navigate(`/Perdidos`);
+
+    // Validação dos campos obrigatórios
+    if (!animalData.type || !animalData.descricao || !animalData.city || !animalData.local || !animalData.status || !animalData.photo) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+
+    try {
+      const base64Photo = await convertToBase64(animalData.photo);
+
+      const formData = {
+        name: animalData.name,
+        type: animalData.type.toLowerCase(),
+        description: animalData.descricao,
+        city: animalData.city,
+        location: animalData.local,
+        status: animalData.status.toLowerCase(),
+        picture: base64Photo,
+        user: user._id,
+      };
+
+      // Log dos dados para depuração
+      console.log('Dados enviados:', formData);
+
+      const token = localStorage.getItem('token');
+      const response = await axios.post('/api/pets', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      console.log('Pet adicionado:', response.data);
+      if (animalData.status === 'Encontrado') {
+        navigate(`/Achados`);
+      } else {
+        navigate(`/Perdidos`);
+      }
+    } catch (error) {
+      console.error('Erro ao adicionar pet:', error.response ? error.response.data : error.message);
     }
   };
 
@@ -107,7 +155,7 @@ const AddAnimal = () => {
               id="photo"
               name="photo"
               accept="image/*"
-              onChange={handleInputChange}
+              onChange={handleFileChange}
             />
 
             <button type="submit" className="submit-button">Salvar Animal</button>

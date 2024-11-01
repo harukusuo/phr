@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
+import PetCard from './PetCard';
 import '../styles/Achados.css';
 
 const Achados = () => {
@@ -46,16 +47,12 @@ const Achados = () => {
 
             <div className="pets-grid">
                 {pets.map((pet, index) => (
-                    <div key={index} className="pet-card">
-                        <img src={pet.picture} alt={pet.name} className="pet-image" />
-                        <div className="pet-info">
-                            <h3>{pet.name} - {pet.type}</h3>
-                            <p><strong>Descrição:</strong> {pet.description}</p>
-                            <p><strong>Local:</strong> {pet.location}, {pet.city}</p>
-                            <p><strong>Anunciante:</strong> {pet.user.name} {pet.user.surname}</p>
-                        </div>
-                        <button className="claim-button" onClick={() => handleClaimClick(pet)}>É meu!</button>
-                    </div>
+                    <PetCard
+                        key={index}
+                        pet={pet}
+                        type="found"
+                        onActionClick={handleClaimClick}
+                    />
                 ))}
             </div>
         </div>

@@ -21,17 +21,14 @@ function App() {
 
     // useEffect para obter usuário e token do local storage
     useEffect(() => {
-        const user = localStorage.getItem('user');
-        const token = localStorage.getItem('token');
+        const storedUser = localStorage.getItem('user');
+        const storedToken = localStorage.getItem('token');
 
-        if (user) {
-            console.log('Usuário obtido do local storage:');
-            console.log(user);
-            setUser(JSON.parse(user));
-        }
-
-        if (token) {
-            setToken(token);
+        if (storedUser && storedToken) {
+            setUser(JSON.parse(storedUser));
+            setToken(storedToken);
+            console.log('Usuário obtido do local storage:', storedUser);
+            console.log('Token obtido do local storage:', storedToken);
         }
     }, []);
 
@@ -65,11 +62,11 @@ function App() {
           <Route path="/pets" element={<Pets />} />
           <Route path="/perdidos" element={<Perdidos />} />
           <Route path="/achados" element={<Achados />} />
-          <Route path="/AddAnimal" element={<AddAnimal />} />
+          <Route path="/AddAnimal" element={<AddAnimal user={user}/>} />
           <Route path="/chats" element={<Chats />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/profile/:id" element={<Profile user={user}/>} />
         </Routes>
       </div>
     </Router>

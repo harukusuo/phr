@@ -6,21 +6,22 @@ import '../styles/Profile.css';
 import ProfilePic from './ProfilePic';
 import noUser from '../assets/noUser.png';
 import notFound from '../assets/notFound.png';
+import PetCard from './PetCard';
 
-const Profile = () => {
-    const handleSendMessage = () => {
-        console.log('Enviar mensagem para', user.name);
-    };
-
-    const [user, setUser] = useState({});
+const Profile = ({user}) => {
+    const [profileUser, setProfileUser] = useState({});
     const [posts, setPosts] = useState([]);
     const [pets, setPets] = useState([]);
     const [activeTab, setActiveTab] = useState('posts');
 
-    const { id } = useParams(); 
-    const loggedInUserId = JSON.parse(localStorage.getItem('user'))._id;
+    const { id } = useParams();
 
     useEffect(() => {
+
+        if (!user) {
+            return;
+        }
+
         const fetchUser = async () => {
             try {
                 const response = await fetch(`/api/users/${id}`);
@@ -28,16 +29,27 @@ const Profile = () => {
                     throw new Error('Erro ao buscar usuário');
                 }
                 const data = await response.json();
-                setUser(data);
+                setProfileUser(data);
             } catch (error) {
                 console.error('Erro ao buscar usuário:', error);
             }
         };
-
-        fetchUser();
-    }, [id]);
     
+        if (id === user._id) {
+            // Se o id for igual ao id do usuário logado, seta o perfil do usuário logado
+            setProfileUser(user);
+            return;
+        } else {
+            fetchUser();
+        }
+    }, [user, id]);
+
     useEffect(() => {
+
+        if (!user || !profileUser || !profileUser._id) {
+            return;
+        }
+
         const fetchPosts = async () => {
             try {
                 const token = localStorage.getItem('token');
@@ -45,7 +57,7 @@ const Profile = () => {
                     console.error('Token não encontrado');
                     return;
                 }
-                const response = await fetch(`/api/posts/owner/${id}`, {
+                const response = await fetch(`/api/posts/owner/${profileUser._id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -63,7 +75,7 @@ const Profile = () => {
                     content: post.text,
                     time: new Date(post.createdAt),
                     likes: post.likes.length,
-                    likedByUser: post.likes.includes(loggedInUserId),
+                    likedByUser: post.likes.includes(user._id),
                     comments: post.comments
                 }));
 
@@ -76,7 +88,7 @@ const Profile = () => {
         };
     
         fetchPosts();
-    }, [id]);
+    }, [profileUser, user]);
 
     useEffect(() => {
         const fetchPets = async () => {
@@ -114,7 +126,7 @@ const Profile = () => {
                         throw new Error('Erro ao atualizar a foto de perfil');
                     }
                     const updatedUser = await response.json();
-                    setUser(updatedUser);
+                    setProfileUser(updatedUser);
                 } catch (error) {
                     console.error('Erro ao atualizar a foto de perfil:', error);
                 }
@@ -172,15 +184,14 @@ const Profile = () => {
                 throw new Error('Erro ao adicionar comentário');
             }
             const updatedPost = await response.json();
-            const loggedInUser = JSON.parse(localStorage.getItem('user'));
             setPosts(posts.map(post => post.id === postId ? { ...post, comments: updatedPost.comments.map(comment => ({
                 _id: comment._id,
                 text: comment.text,
-                user: {
-                    _id: comment.user._id,
-                    name: comment.user.name,
-                    surname: comment.user.surname,
-                    profilePic: comment.user.profilePic
+                profileUser: {
+                    _id: comment.profileUser._id,
+                    name: comment.profileUser.name,
+                    surname: comment.profileUser.surname,
+                    profilePic: comment.profileUser.profilePic
                 }
             })) } : post));
         } catch (error) {
@@ -188,39 +199,55 @@ const Profile = () => {
         }
     };
 
-    const title = "Perfil de " + (user.name || '');
+    const handleSendMessage = () => {
+        console.log('Enviar mensagem para', profileUser.name);
+    };
+
+    const title = "Perfil de " + (profileUser.name || '');
 
     return (
         <div className="profile">
-            <Header text={`Perfil de ${user.name || ''} ${user.surname || ''}`}/>
+            <Header text={`Perfil de ${profileUser.name || ''} ${profileUser.surname || ''}`}/>
 
             <div className="profile-content">
                 <div className='profile-content-info'>
                     <div className='profile-content-info-header'>
                         <div className="profile-info">
-                            <span className="profile-username">{user.name} {user.surname}</span>
-                            {loggedInUserId !== id && (
+                            <span className="profile-username">{profileUser.name} {profileUser.surname}</span>
+                            {user?._id !== id && (
                                 <button className="send-message-button" onClick={handleSendMessage}>
                                     <span className="material-symbols-outlined">mail</span> Enviar Mensagem
                                 </button>
                             )}
                         </div>
-                        <input
-                            type="file"
-                            accept="image/*"
-                            style={{ display: 'none' }}
-                            id="profile-pic-input"
-                            onChange={handleProfilePicChange}
-                        />
+                        {user?._id === id && (
+                            <>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                    id="profile-pic-input"
+                                    onChange={handleProfilePicChange}
+                                />
                         <label htmlFor="profile-pic-input">
+                                    <ProfilePic 
+                                        src={profileUser.profilePic || noUser} 
+                                        alt={user.name || 'Usuário'} 
+                                        width={150} 
+                                        height={150} 
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                </label>
+                            </>
+                        )}
+                        {user?._id !== id && (
                             <ProfilePic 
-                                src={user.profilePic || noUser} 
-                                alt={user.name || 'Usuário'} 
+                                src={profileUser.profilePic || noUser} 
+                                alt={profileUser.name || 'Usuário'} 
                                 width={150} 
                                 height={150} 
-                                style={{ cursor: 'pointer' }}
                             />
-                        </label>
+                        )}
                     </div>
                     <div className='profile-content-info-body'>
                         {/* Outros conteúdos */}
@@ -258,14 +285,12 @@ const Profile = () => {
                     pets.length > 0 ? (
                         <div className="pets-grid">
                             {pets.map((pet, index) => (
-                                <div key={index} className="pet-card">
-                                    <img src={pet.picture} alt={pet.name} className="pet-image" />
-                                    <div className="pet-info">
-                                        <h3>{pet.name} - {pet.type}</h3>
-                                        <p><strong>Descrição:</strong> {pet.description}</p>
-                                        <p><strong>Local:</strong> {pet.location}, {pet.city}</p>
-                                    </div>
-                                </div>
+                                <PetCard
+                                    key={index}
+                                    pet={pet}
+                                    type={pet.status} // Assuming pet.status is 'lost' or 'found'
+                                    onActionClick={null} // No action button in the profile view
+                                />
                             ))}
                         </div>
                     ) : (
