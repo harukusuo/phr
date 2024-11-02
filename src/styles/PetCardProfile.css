@@ -1,4 +1,13 @@
-.pet-card {
+.pet-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.pet-card-profile {
+    flex: 1 1 calc(33.333% - 20px);
+    box-sizing: border-box;
     background-color: #FFFFFF;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -7,18 +16,18 @@
     transition: transform 0.2s;
 }
 
-.pet-card:hover {
+.pet-card-profile:hover {
     transform: scale(1.05);
 }
 
-.pet-image-container {
+.pet-image-container-profile {
     width: 100%;
     padding-top: 100%; /* 1:1 Aspect Ratio */
     position: relative;
     overflow: hidden; /* Adicionado para garantir que a imagem não ultrapasse a div */
 }
 
-.pet-image {
+.pet-image-profile {
     position: absolute;
     top: 0;
     left: 0;
@@ -29,20 +38,20 @@
     margin-bottom: 10px;
 }
 
-.pet-info h3 {
+.pet-info-profile h3 {
     color: #DD6A00;
     margin-bottom: 5px;
 }
 
-.pet-info p {
+.pet-info-profile p {
     color: #333;
 }
 
-.pet-info p strong {
+.pet-info-profile p strong {
     color: #DD6A00;
 }
 
-.pet-action-button {
+.pet-action-button-profile {
     background-color: #DD6A00;
     color: white;
     font-size: 16px;
@@ -57,6 +66,6 @@
     transition: background-color 0.3s;
 }
 
-.pet-action-button:hover {
+.pet-action-button-profile:hover {
     background-color: #c25b00;
 }

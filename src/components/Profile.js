@@ -6,7 +6,7 @@ import '../styles/Profile.css';
 import ProfilePic from './ProfilePic';
 import noUser from '../assets/noUser.png';
 import notFound from '../assets/notFound.png';
-import PetCard from './PetCard';
+import PetCardProfile from './PetCardProfile';
 
 const Profile = ({user}) => {
     const [profileUser, setProfileUser] = useState({});
@@ -154,8 +154,8 @@ const Profile = ({user}) => {
 
     const handleLikePost = async (postId, isLiked) => {
         try {
-            const response = await fetch(`/api/posts/${postId}/like`, {
-                method: isLiked ? 'DELETE' : 'POST',
+            const response = await fetch(`/api/posts/${postId}/${isLiked ? 'dislike' : 'like'}`, {
+                method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
@@ -203,11 +203,19 @@ const Profile = ({user}) => {
         console.log('Enviar mensagem para', profileUser.name);
     };
 
-    const title = "Perfil de " + (profileUser.name || '');
+    const handleActionClick = (pet) => {
+        if (pet.status === 'lost') {
+            console.log('Encontrei o pet:', pet.name);
+        } else {
+            console.log('É meu pet:', pet.name);
+        }
+    };
+
+    const title = user?._id === id ? "Meu perfil" : `Perfil de ${profileUser.name || ''} ${profileUser.surname || ''}`;
 
     return (
         <div className="profile">
-            <Header text={`Perfil de ${profileUser.name || ''} ${profileUser.surname || ''}`}/>
+            <Header text={title}/>
 
             <div className="profile-content">
                 <div className='profile-content-info'>
@@ -285,11 +293,12 @@ const Profile = ({user}) => {
                     pets.length > 0 ? (
                         <div className="pets-grid">
                             {pets.map((pet, index) => (
-                                <PetCard
+                                <PetCardProfile
                                     key={index}
                                     pet={pet}
                                     type={pet.status} // Assuming pet.status is 'lost' or 'found'
-                                    onActionClick={null} // No action button in the profile view
+                                    onActionClick={handleActionClick}
+                                    showDetails={false} // Não mostrar detalhes adicionais
                                 />
                             ))}
                         </div>

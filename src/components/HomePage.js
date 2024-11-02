@@ -48,7 +48,9 @@ const HomePage = ({ user, token }) => {
       }
     };
 
-    fetchPosts();
+    if (token) {
+      fetchPosts();
+    }
   }, [token]);
 
   // NEW POST
@@ -120,8 +122,8 @@ const HomePage = ({ user, token }) => {
 
   const handleLikePost = async (postId, isLiked) => {
     try {
-        const response = await fetch(`/api/posts/${postId}/like`, {
-            method: isLiked ? 'DELETE' : 'POST',
+        const response = await fetch(`/api/posts/${postId}/${isLiked ? 'dislike' : 'like'}`, {
+            method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
             }
