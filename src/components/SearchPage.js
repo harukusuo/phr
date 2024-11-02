@@ -4,8 +4,8 @@ import BottomBar from './BottomBar'
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import searchIcon from '../assets/searching.png'
-import lookingPets from '../assets/looking_pets.png' // Importar a imagem
-import ProfilePic from './ProfilePic' // Importar o novo componente
+import lookingPets from '../assets/looking_pets.png'
+import ProfilePic from './ProfilePic'
 
 const SearchPage = () => {
     const navigate = useNavigate();
@@ -69,7 +69,7 @@ const SearchPage = () => {
                     {users.map((user, index) => (
                         <div key={index} className="searchpage-result" onClick={() => handleUserClick(user._id)}>
                             <div className="searchpage-pic-container">
-                                <ProfilePic src={user.profilePic} alt={`${user.name}'s profile`} className="searchpage-profile-pic" width={60} height={60}/> {/* Usar o novo componente */}
+                                <ProfilePic src={user.profilePic} alt={`${user.name}'s profile`} className="searchpage-profile-pic" width={60} height={60}/> 
                             </div>
                             <div className="searchpage-username">{user.name} {user.surname}</div>
                         </div>

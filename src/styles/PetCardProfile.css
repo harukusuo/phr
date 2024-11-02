@@ -22,9 +22,9 @@
 
 .pet-image-container-profile {
     width: 100%;
-    padding-top: 100%; /* 1:1 Aspect Ratio */
+    padding-top: 100%;
     position: relative;
-    overflow: hidden; /* Adicionado para garantir que a imagem não ultrapasse a div */
+    overflow: hidden;
 }
 
 .pet-image-profile {

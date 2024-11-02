@@ -124,3 +124,13 @@
 .avisos li:hover {
   color: #ff4500;
 }
+
+.search-link {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.search-link:hover,
+.search-link:active {
+    color: #DD6A00;
+}

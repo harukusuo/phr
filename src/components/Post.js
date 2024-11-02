@@ -31,7 +31,7 @@ function timeSince(date) {
 
 const Post = ({ user, post, onDelete, onLike, onAddComment }) => {
     const navigate = useNavigate();
-    const loggedInUserId = JSON.parse(localStorage.getItem('user'))._id; // Obter o ID do usuário logado
+    const loggedInUserId = JSON.parse(localStorage.getItem('user'))._id;
     const [isLiked, setIsLiked] = useState(post.likedByUser);
     const [likesCount, setLikesCount] = useState(post.likes);
     const [newComment, setNewComment] = useState("");
@@ -78,7 +78,7 @@ const Post = ({ user, post, onDelete, onLike, onAddComment }) => {
                     <span className="post-header-info-username" onClick={() => handleUserClick(user._id)}>{user?.name} {user?.surname}</span>
                     <span className="post-header-info-time" title={new Date(post.time).toLocaleString()}>{timeSince(post.time)} atrás</span>
                 </div>
-                {loggedInUserId === user._id && ( // Mostrar os três pontinhos apenas para os posts do usuário logado
+                {loggedInUserId === user._id && (
                     <div className="post-options">
                         <span className="material-symbols-outlined" onClick={() => setShowDeleteMenu(!showDeleteMenu)}>more_vert</span>
                         {showDeleteMenu && (
@@ -97,7 +97,7 @@ const Post = ({ user, post, onDelete, onLike, onAddComment }) => {
                     <span className="material-symbols-outlined like-icon">
                         {isLiked ? 'heart_check' : 'heart_plus'}
                     </span>
-                    <span>{likesCount} likes</span>
+                    <span>{likesCount} {likesCount === 1 ? 'like' : 'likes'}</span>
                 </div>
             </div>
 

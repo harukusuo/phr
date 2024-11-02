@@ -122,7 +122,6 @@
     flex-direction: column;
 }
 
-/* Adicione este estilo para tornar o ponteiro clicável */
 .profile-content-info-header label {
     cursor: pointer;
 }
@@ -165,18 +164,18 @@
 .empty-message img {
     display: block;
     margin: 20px auto;
-    max-width: 200px; /* Aumente o tamanho da imagem */
+    max-width: 200px;
 }
 
 .pets-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Garante 3 colunas */
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-top: 20px;
 }
 
 @media (max-width: 768px) {
     .pets-grid {
-        grid-template-columns: 1fr; /* Mantém uma coluna em telas menores */
+        grid-template-columns: 1fr;
     }
 }

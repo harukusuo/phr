@@ -6,7 +6,6 @@ import BottomBar from './BottomBar';
 
 function NavBar({ user }) {
 
-    // Define quais rotas devem ter a barra
     const routesWithNavbar = [
         '/homepage',
         '/search',

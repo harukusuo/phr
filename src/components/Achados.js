@@ -52,7 +52,7 @@ const Achados = () => {
                         pet={pet}
                         type="found"
                         onActionClick={handleClaimClick}
-                        showDetails={true} // Mostrar detalhes adicionais
+                        showDetails={true}
                     />
                 ))}
             </div>

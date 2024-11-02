@@ -52,7 +52,7 @@ const Perdidos = () => {
                         pet={pet}
                         type="lost"
                         onActionClick={handleFoundClick}
-                        showDetails={true} // Mostrar detalhes adicionais
+                        showDetails={true}
                     />
                 ))}
             </div>

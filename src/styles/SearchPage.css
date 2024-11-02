@@ -68,14 +68,14 @@
 .searchpage-placeholder {
     display: flex;
     justify-content: center;
-    align-items: flex-end; /* Alinhar na parte inferior */
+    align-items: flex-end;
     height: 100%;
-    margin-bottom: 2em; /* Adicionar margem inferior */
+    margin-bottom: 2em;
 }
 
 .searchpage-placeholder img {
-    width: 80%; /* Ajustar o tamanho da imagem */
-    max-width: 300px; /* Definir um tamanho máximo */
+    width: 80%;
+    max-width: 300px;
 }
 
 @media (max-width: 600px) {

@@ -82,7 +82,7 @@ const Login = ({ setUser, setToken }) => {
       }
 
       setTimeout(() => {
-        window.scrollTo(0, 0); // Reseta o scroll para o topo antes de navegar
+        window.scrollTo(0, 0);
         navigate('/homepage');
       }, 2000);
 
@@ -94,7 +94,7 @@ const Login = ({ setUser, setToken }) => {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleLogin(e); // Passar o evento corretamente
+      handleLogin(e);
     }
   };
 

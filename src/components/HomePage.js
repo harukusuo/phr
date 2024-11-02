@@ -17,7 +17,7 @@ const HomePage = ({ user, token }) => {
       }
 
       try {
-        console.log('Token:', token); // Adiciona um log para verificar o token
+        console.log('Token:', token); 
         const response = await fetch('/api/posts', {
           headers: {
             'Authorization': `Bearer ${token}`
@@ -39,7 +39,6 @@ const HomePage = ({ user, token }) => {
           comments: post.comments
         }));
 
-        // Ordene os posts por data, do mais recente para o mais antigo
         formattedPosts.sort((a, b) => b.time - a.time);
 
         setPosts(formattedPosts);

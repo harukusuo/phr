@@ -40,7 +40,7 @@ const AddAnimal = ({user}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validação dos campos obrigatórios
+    // valida dos campos obrigatórios
     if (!animalData.type || !animalData.descricao || !animalData.city || !animalData.local || !animalData.status || !animalData.photo) {
       alert('Por favor, preencha todos os campos obrigatórios.');
       return;
@@ -60,7 +60,6 @@ const AddAnimal = ({user}) => {
         user: user._id,
       };
 
-      // Log dos dados para depuração
       console.log('Dados enviados:', formData);
 
       const token = localStorage.getItem('token');

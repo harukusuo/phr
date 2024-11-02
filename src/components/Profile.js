@@ -36,7 +36,6 @@ const Profile = ({user}) => {
         };
     
         if (id === user._id) {
-            // Se o id for igual ao id do usuário logado, seta o perfil do usuário logado
             setProfileUser(user);
             return;
         } else {
@@ -258,7 +257,6 @@ const Profile = ({user}) => {
                         )}
                     </div>
                     <div className='profile-content-info-body'>
-                        {/* Outros conteúdos */}
                     </div>
                 </div>
             </div>
@@ -296,9 +294,9 @@ const Profile = ({user}) => {
                                 <PetCardProfile
                                     key={index}
                                     pet={pet}
-                                    type={pet.status} // Assuming pet.status is 'lost' or 'found'
+                                    type={pet.status}
                                     onActionClick={handleActionClick}
-                                    showDetails={false} // Não mostrar detalhes adicionais
+                                    showDetails={false}
                                 />
                             ))}
                         </div>

@@ -34,7 +34,7 @@
 .post-profile-pic-container {
     background-color: #fff;
     margin-right: 12px;
-    overflow: hidden; /* Adicionado para garantir que a imagem não ultrapasse o contêiner */
+    overflow: hidden;
 }
 
 .post-profile-pic,
@@ -43,12 +43,12 @@
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
-    object-fit: cover; /* Adicionado para garantir que a imagem se ajuste ao contêiner */
+    object-fit: cover;
 }
 
 .post-profile-pic {
-    width: 45px; /* Ajuste o tamanho da imagem para ser menor que o contêiner */
-    height: 45px; /* Ajuste o tamanho da imagem para ser menor que o contêiner */
+    width: 45px;
+    height: 45px;
 }
 
 .post-content {

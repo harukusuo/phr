@@ -55,7 +55,7 @@ const Cadastro = () => {
           surname: lastName,
           email: email,
           password: password,
-          profilePicture: noUser // Definindo a imagem de perfil padrão
+          profilePicture: noUser
         }),
       });
       const data = await res.json();
@@ -68,7 +68,7 @@ const Cadastro = () => {
       successMessageRef.current.scrollIntoView({ behavior: 'smooth' });
       
       setTimeout(() => {
-        window.scrollTo(0, 0); // Reseta o scroll para o topo antes de navegar
+        window.scrollTo(0, 0);
         navigate('/login');
       }, 2000); 
     } catch (err) {

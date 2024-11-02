@@ -1,15 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from './Header';
-import fakeUser from '../mock/user.json';
 import '../styles/Chat.css';
 import sendIcon from '../assets/enviar.png';
-import ProfilePic from './ProfilePic'; // Importar o novo componente
+import ProfilePic from './ProfilePic';
+import axios from 'axios';
 
 const Chat = () => {
     const location = useLocation();
-    const [messages, setMessages] = useState(location.state.messages);
-    const [user, setUser] = useState(fakeUser);
+    const [messages, setMessages] = useState(location.state.messages?.messages || []);
+    const [user, setUser] = useState(location.state.messages?.user || {});
     const [newMessage, setNewMessage] = useState("");
     const messagesEndRef = useRef(null);
 
@@ -31,36 +31,39 @@ const Chat = () => {
         );
     };
 
-    const handleSendMessage = () => {
+    const handleSendMessage = async () => {
         if (newMessage.trim() === "") return;
 
         const newMsg = {
             text: newMessage,
             userId: user.id,
         };
-        setMessages((prev) => ({
-            ...prev,
-            messages: [...prev.messages, newMsg],
-        }));
-        setNewMessage("");
-        scrollToBottom();
+
+        try {
+            const response = await axios.post(`/api/users/conversations/${user.id}`, { text: newMessage });
+            setMessages((prev) => [...prev, response.data.messages[response.data.messages.length - 1]]);
+            setNewMessage("");
+            scrollToBottom();
+        } catch (error) {
+            console.error('Erro ao enviar mensagem:', error);
+        }
     };
 
     return (
         <div className="chat-container">
-            <Header text={`Chat com ${messages.user.name}`} hasBackButton={true} />
+            <Header text={`Chat com ${user.name || ''}`} hasBackButton={true} />
 
             <div className="chat-header">
                 <div className="chat-profile-pic">
-                    <ProfilePic src={messages.user.profilePicture} alt={messages.user.name} /> {/* Usar o novo componente */}
+                    {user.profilePic && <ProfilePic src={user.profilePic} alt={user.name} />} {/* Usar o novo componente */}
                 </div>
                 <div className="chat-profile-name">
-                    {messages.user.name} {messages.user.sobrenome}
+                    {user.name} {user.surname}
                 </div>
             </div>
 
             <div className="chat-content">
-                {messages.messages.map((msg, index) => renderMessage(msg, index))}
+                {messages.map((msg, index) => renderMessage(msg, index))}
                 <div ref={messagesEndRef} />
             </div>
 
