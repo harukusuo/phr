@@ -1,32 +1,81 @@
 import { useEffect, useState, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from './Header';
 import '../styles/Chat.css';
 import sendIcon from '../assets/enviar.png';
 import ProfilePic from './ProfilePic';
-import axios from 'axios';
 
-const Chat = () => {
-    const location = useLocation();
-    const [messages, setMessages] = useState(location.state.messages?.messages || []);
-    const [user, setUser] = useState(location.state.messages?.user || {});
+const Chat = ({user, token}) => {
+    const [otherUser, setOtherUser] = useState({
+        name: "Carregando...",
+        surname: "",
+        profilePic: ""
+    });
+    const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
     const messagesEndRef = useRef(null);
+
+    const { id } = useParams();
+    const otherUserId = id;
 
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const fetchMessages = async () => {
+                try {
+                    const response = await fetch(`/api/users/messages/to/${otherUserId}`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    const data = await response.json();
+                    setMessages(data);
+                } catch (error) {
+                    console.error('Erro ao obter mensagens da conversa:', error);
+                }
+            };
+
+            if (token && otherUserId) {
+                fetchMessages();
+            }
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [token, otherUserId]);
+
+    useEffect(() => {
+        const fetchOtherUser = async () => {
+            try {
+                const response = await fetch(`/api/users/${otherUserId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const data = await response.json();
+                setOtherUser(data);
+            } catch (error) {
+                console.error('Erro ao obter informações do usuário:', error);
+            }
+        };
+
+        if (token && otherUserId) {
+            fetchOtherUser();
+        }
+    }, [token, otherUserId]);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     const renderMessage = (msg, index) => {
-        const isMyMessage = msg.userId === user.id;
+        const isMyMessage = msg.sender === user._id;
         const style = isMyMessage ? "chat-message-mine" : "chat-message-other";
         return (
             <div key={index} className={"chat-message " + style}>
-                <span className="message-text">{msg.text}</span>
+                <span className="message-text">{msg.message}</span>
             </div>
         );
     };
@@ -35,13 +84,20 @@ const Chat = () => {
         if (newMessage.trim() === "") return;
 
         const newMsg = {
-            text: newMessage,
-            userId: user.id,
+            text: newMessage
         };
 
         try {
-            const response = await axios.post(`/api/users/conversations/${user.id}`, { text: newMessage });
-            setMessages((prev) => [...prev, response.data.messages[response.data.messages.length - 1]]);
+            const response = await fetch(`/api/users/messages/to/${otherUserId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(newMsg)
+            });
+            const data = await response.json();
+            setMessages((prev) => [...prev, data]);
             setNewMessage("");
             scrollToBottom();
         } catch (error) {
@@ -51,14 +107,12 @@ const Chat = () => {
 
     return (
         <div className="chat-container">
-            <Header text={`Chat com ${user.name || ''}`} hasBackButton={true} />
+            <Header text={`Chat com ${otherUser.name || ''}`} hasBackButton={true} />
 
             <div className="chat-header">
-                <div className="chat-profile-pic">
-                    {user.profilePic && <ProfilePic src={user.profilePic} alt={user.name} />} {/* Usar o novo componente */}
-                </div>
+                <ProfilePic src={otherUser.profilePic} alt={otherUser.name} />
                 <div className="chat-profile-name">
-                    {user.name} {user.surname}
+                    {otherUser.name} {otherUser.surname}
                 </div>
             </div>
 

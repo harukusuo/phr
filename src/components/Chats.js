@@ -4,31 +4,40 @@ import BottomBar from './BottomBar'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProfilePic from './ProfilePic';
-import axios from 'axios';
 import notFound from '../assets/notFound.png';
 
-const Chats = () => {
+const Chats = ({ user, token }) => {
 
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
-    const [conversations, setConversations] = useState([]);
+    const [latestMessages, setLatestMessages] = useState([]);
 
     useEffect(() => {
         const fetchConversations = async () => {
             try {
-                const userId = '671424ff36f53797c78488f0'; // ATENCAO NISSO !! problema pode estar aqui
-                const response = await axios.get(`/api/users/${userId}/conversations`);
-                setConversations(response.data);
+                const response = await fetch('/api/users/messages/latest', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const data = await response.json();
+                // sort data by timestamp
+                data.sort((a, b) => {
+                    return new Date(b.timestamp) - new Date(a.timestamp);
+                });
+                setLatestMessages(data);
             } catch (error) {
                 console.error('Erro ao obter conversas:', error);
             }
         };
 
-        fetchConversations();
-    }, []);
+        if (token) {
+            fetchConversations();
+        }
+    }, [token]);
 
     const onConvClick = (conv) => {
-        navigate('/chat', { state: { messages: conv } });
+        navigate('/chat/' + conv.user.userId);
     }
 
     const handleSearchClick = () => {
@@ -40,30 +49,23 @@ const Chats = () => {
             <Header text="Chats" hasBackButton={false} />
 
             <div className="chats-messages">
-                {conversations.length > 0 ? (
-                    conversations.map((conv, index) => (
+                {latestMessages.length > 0 ? (
+                    latestMessages.map((conv, index) => (
                         <div key={index} className="chats-message" onClick={() => onConvClick(conv)}>
-                            <div className="chats-message-avatar">
-                                {conv.user && (
-                                    <>
-                                        <ProfilePic src={conv.user.profilePic} alt={conv.user.name} /> {/* Usar o novo componente */}
-                                        <span className={`status ${conv.user.isOnline ? 'online' : 'offline'}`}></span>
-                                    </>
-                                )}
-                            </div>
+                            <ProfilePic src={conv.user.profilePic} alt={conv.user.name} />
                             <div className="chats-message-body">
-                                {conv.user && conv.messages && conv.messages.length > 0 && (
-                                    <>
-                                        <div className="chats-message-user">{conv.user.name} {conv.user.surname}</div>
-                                        <div className="chats-message-text">{conv.messages[0].text}</div>
-                                    </>
-                                )}
+                                <div className="chats-message-user">{conv.user.name} {conv.user.surname}</div>
+                                <div className="chats-message-timestamp">{new Date(conv.timestamp).toLocaleString()}</div>
+                                <div className="chats-message-sender">
+                                    {conv.sender == user._id ? (<div className="chats-message-sender-name">Você: </div>) : <></>}
+                                    <div className="chats-message-text">{conv.message}</div>
+                                </div>
                             </div>
                         </div>
                     ))
                 ) : (
                     <div className="empty-message">
-                        Ops! Aqui parece vazio...
+                        Ops! Aqui parece vazio... <br></br>
                         <span className="search-link" onClick={handleSearchClick}>Experimente buscar um usuário</span> para iniciar uma conversa.
                         <img src={notFound} alt="Not Found" />
                     </div>
