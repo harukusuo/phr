@@ -13,6 +13,10 @@ const Chats = ({ user, token }) => {
 
     useEffect(() => {
         const fetchConversations = async () => {
+            if (!token) {
+                console.error('Token não fornecido');
+                return;
+            }
             try {
                 const response = await fetch('/api/users/messages/latest', {
                     method: 'GET',

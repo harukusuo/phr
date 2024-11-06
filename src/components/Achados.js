@@ -23,6 +23,10 @@ const Achados = ({ user, token }) => {
     }, []);
 
     const handleClaimClick = async (pet) => {
+        if (!token) {
+            console.error('Token não fornecido');
+            return;
+        }
         const message = `Olá, eu sou o dono do pet ${pet.name || 'encontrado'}. Por favor, entre em contato comigo.`;
         try {
             const response = await fetch(`/api/users/messages/to/${pet.user._id}`, {

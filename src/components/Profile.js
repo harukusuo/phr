@@ -8,7 +8,7 @@ import noUser from '../assets/noUser.png';
 import notFound from '../assets/notFound.png';
 import PetCardProfile from './PetCardProfile';
 
-const Profile = ({ user, token }) => {
+const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
     const [profileUser, setProfileUser] = useState({});
     const [posts, setPosts] = useState([]);
     const [pets, setPets] = useState([]);
@@ -129,8 +129,11 @@ const Profile = ({ user, token }) => {
                     }
                     const updatedUser = await response.json();
                     setProfileUser(updatedUser);
-                    setProfilePic(updatedUser.profilePic || noUser); // Atualiza a foto de perfil
-                    console.log('Foto de perfil atualizada:', updatedUser.profilePic); // Adiciona log
+                    setProfilePic(updatedUser.profilePic || noUser);
+                    if (id === user._id) {
+                        setUser(updatedUser);
+                    }
+                    console.log('Foto de perfil atualizada:', updatedUser.profilePic); 
                 } catch (error) {
                     console.error('Erro ao atualizar a foto de perfil:', error);
                 }
@@ -301,6 +304,8 @@ const Profile = ({ user, token }) => {
                                     pet={pet}
                                     type={pet.status}
                                     onActionClick={handleActionClick}
+                                    user={user}
+                                    token={token}
                                     showDetails={false}
                                 />
                             ))}

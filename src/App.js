@@ -60,13 +60,13 @@ function App() {
           <Route path="/homepage" element={<HomePage user={user} token={token}/>} />
           <Route path="/search/:query?" element={<SearchPage user={user} token={token}/>} />
           <Route path="/pets" element={<Pets />} />
-          <Route path="/perdidos" element={<Perdidos />} />
-          <Route path="/achados" element={<Achados />} />
+          <Route path="/perdidos" element={<Perdidos user={user} token={token}/>} />
+          <Route path="/achados" element={<Achados user={user} token={token}/>} />
           <Route path="/AddAnimal" element={<AddAnimal user={user}/>} />
           <Route path="/chats" element={<Chats user={user} token={token} />} />
           <Route path="/chat/:id" element={<Chat user={user} token={token} />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/profile/:id" element={<Profile user={user} token={token}/>} />
+          <Route path="/profile/:id" element={<Profile user={user} token={token} setUser={setUser}/>} />
         </Routes>
       </div>
     </Router>

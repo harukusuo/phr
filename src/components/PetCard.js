@@ -6,6 +6,10 @@ const PetCard = ({ pet, type, onActionClick, showDetails, user, token }) => {
     const buttonText = isLost ? 'Encontrei!' : 'É meu!';
 
     const handleClick = async () => {
+        if (!token) {
+            console.error('Token não fornecido');
+            return;
+        }
         const message = isLost
             ? `Olá, eu encontrei o pet ${pet.name || 'perdido'}. Por favor, entre em contato comigo.`
             : `Olá, eu sou o dono do pet ${pet.name || 'encontrado'}. Por favor, entre em contato comigo.`;

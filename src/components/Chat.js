@@ -25,6 +25,10 @@ const Chat = ({user, token}) => {
     useEffect(() => {
         const interval = setInterval(() => {
             const fetchMessages = async () => {
+                if (!token) {
+                    console.error('Token não fornecido');
+                    return;
+                }
                 try {
                     const response = await fetch(`/api/users/messages/to/${otherUserId}`, {
                         headers: {
@@ -48,6 +52,10 @@ const Chat = ({user, token}) => {
 
     useEffect(() => {
         const fetchOtherUser = async () => {
+            if (!token) {
+                console.error('Token não fornecido');
+                return;
+            }
             try {
                 const response = await fetch(`/api/users/${otherUserId}`, {
                     headers: {

@@ -23,6 +23,10 @@ const Perdidos = ({ user, token }) => {
     }, []);
 
     const handleFoundClick = async (pet) => {
+        if (!token) {
+            console.error('Token não fornecido');
+            return;
+        }
         const message = `Olá, eu encontrei o pet ${pet.name || 'perdido'}. Por favor, entre em contato comigo.`;
         try {
             const response = await fetch(`/api/users/messages/to/${pet.user._id}`, {
@@ -56,7 +60,7 @@ const Perdidos = ({ user, token }) => {
                     <PetCard
                         key={index}
                         pet={pet}
-                        type="lost"
+                        type="perdido"
                         onActionClick={handleFoundClick}
                         showDetails={true}
                         user={user}
