@@ -58,7 +58,7 @@ function App() {
           <Route path="/" element={<WelcomeScreen />} />
           <Route path="/login" element={<LoginScreen setUser={setUser} setToken={setToken}/>} />
           <Route path="/homepage" element={<HomePage user={user} token={token}/>} />
-          <Route path="/search/:query?" element={<SearchPage />} />
+          <Route path="/search/:query?" element={<SearchPage user={user} token={token}/>} />
           <Route path="/pets" element={<Pets />} />
           <Route path="/perdidos" element={<Perdidos />} />
           <Route path="/achados" element={<Achados />} />
@@ -66,7 +66,7 @@ function App() {
           <Route path="/chats" element={<Chats user={user} token={token} />} />
           <Route path="/chat/:id" element={<Chat user={user} token={token} />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/profile/:id" element={<Profile user={user}/>} />
+          <Route path="/profile/:id" element={<Profile user={user} token={token}/>} />
         </Routes>
       </div>
     </Router>

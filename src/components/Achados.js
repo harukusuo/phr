@@ -4,7 +4,7 @@ import Header from './Header';
 import PetCard from './PetCard';
 import '../styles/Achados.css';
 
-const Achados = () => {
+const Achados = ({ user, token }) => {
     const [pets, setPets] = useState([]);
     const navigate = useNavigate();
 
@@ -25,16 +25,22 @@ const Achados = () => {
     const handleClaimClick = async (pet) => {
         const message = `Olá, eu sou o dono do pet ${pet.name || 'encontrado'}. Por favor, entre em contato comigo.`;
         try {
-            await fetch('/api/sendMessage', {
+            const response = await fetch(`/api/users/messages/to/${pet.user._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
-                    to: `${pet.user.name} ${pet.user.surname}`,
-                    message,
+                    text: message,
                 }),
             });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Erro ao enviar mensagem');
+            }
+
             console.log(`Mensagem enviada para o anunciante do pet ${pet.name}`);
         } catch (error) {
             console.error('Erro ao enviar mensagem:', error);
@@ -53,6 +59,8 @@ const Achados = () => {
                         type="found"
                         onActionClick={handleClaimClick}
                         showDetails={true}
+                        user={user}
+                        token={token}
                     />
                 ))}
             </div>

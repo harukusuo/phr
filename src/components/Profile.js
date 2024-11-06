@@ -1,35 +1,42 @@
 import Header from './Header';
 import Posts from './Posts';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/Profile.css';
 import ProfilePic from './ProfilePic';
 import noUser from '../assets/noUser.png';
 import notFound from '../assets/notFound.png';
 import PetCardProfile from './PetCardProfile';
 
-const Profile = ({user}) => {
+const Profile = ({ user, token }) => {
     const [profileUser, setProfileUser] = useState({});
     const [posts, setPosts] = useState([]);
     const [pets, setPets] = useState([]);
     const [activeTab, setActiveTab] = useState('posts');
+    const [profilePic, setProfilePic] = useState(noUser); // Novo estado para a foto de perfil
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
 
-        if (!user) {
+        if (!user || !token) {
             return;
         }
 
         const fetchUser = async () => {
             try {
-                const response = await fetch(`/api/users/${id}`);
+                const response = await fetch(`/api/users/${id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 if (!response.ok) {
                     throw new Error('Erro ao buscar usuário');
                 }
                 const data = await response.json();
                 setProfileUser(data);
+                setProfilePic(data.profilePic || noUser); // Atualiza a foto de perfil
             } catch (error) {
                 console.error('Erro ao buscar usuário:', error);
             }
@@ -37,25 +44,21 @@ const Profile = ({user}) => {
     
         if (id === user._id) {
             setProfileUser(user);
+            setProfilePic(user.profilePic || noUser); // Atualiza a foto de perfil
             return;
         } else {
             fetchUser();
         }
-    }, [user, id]);
+    }, [user, id, token]);
 
     useEffect(() => {
 
-        if (!user || !profileUser || !profileUser._id) {
+        if (!user || !profileUser || !profileUser._id || !token) {
             return;
         }
 
         const fetchPosts = async () => {
             try {
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    console.error('Token não encontrado');
-                    return;
-                }
                 const response = await fetch(`/api/posts/owner/${profileUser._id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -87,7 +90,7 @@ const Profile = ({user}) => {
         };
     
         fetchPosts();
-    }, [profileUser, user]);
+    }, [profileUser, user, token]);
 
     useEffect(() => {
         const fetchPets = async () => {
@@ -117,7 +120,7 @@ const Profile = ({user}) => {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${localStorage.getItem('token')}`
+                            'Authorization': `Bearer ${token}`
                         },
                         body: JSON.stringify({ profilePic: `data:image/jpeg;base64,${base64String}` })
                     });
@@ -126,6 +129,8 @@ const Profile = ({user}) => {
                     }
                     const updatedUser = await response.json();
                     setProfileUser(updatedUser);
+                    setProfilePic(updatedUser.profilePic || noUser); // Atualiza a foto de perfil
+                    console.log('Foto de perfil atualizada:', updatedUser.profilePic); // Adiciona log
                 } catch (error) {
                     console.error('Erro ao atualizar a foto de perfil:', error);
                 }
@@ -139,7 +144,7 @@ const Profile = ({user}) => {
             const response = await fetch(`/api/posts/${postId}`, {
                 method: 'DELETE',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${token}`
                 }
             });
             if (!response.ok) {
@@ -156,7 +161,7 @@ const Profile = ({user}) => {
             const response = await fetch(`/api/posts/${postId}/${isLiked ? 'dislike' : 'like'}`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${token}`
                 }
             });
             if (!response.ok) {
@@ -175,7 +180,7 @@ const Profile = ({user}) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({ text: commentText })
             });
@@ -199,11 +204,11 @@ const Profile = ({user}) => {
     };
 
     const handleSendMessage = () => {
-        console.log('Enviar mensagem para', profileUser.name);
+        navigate(`/chat/${profileUser._id}`);
     };
 
     const handleActionClick = (pet) => {
-        if (pet.status === 'lost') {
+        if (pet.status === 'perdido') {
             console.log('Encontrei o pet:', pet.name);
         } else {
             console.log('É meu pet:', pet.name);
@@ -238,7 +243,7 @@ const Profile = ({user}) => {
                                 />
                         <label htmlFor="profile-pic-input">
                                     <ProfilePic 
-                                        src={profileUser.profilePic || noUser} 
+                                        src={profilePic} // Usa o novo estado para a foto de perfil
                                         alt={user.name || 'Usuário'} 
                                         width={150} 
                                         height={150} 
@@ -249,7 +254,7 @@ const Profile = ({user}) => {
                         )}
                         {user?._id !== id && (
                             <ProfilePic 
-                                src={profileUser.profilePic || noUser} 
+                                src={profilePic} // Usa o novo estado para a foto de perfil
                                 alt={profileUser.name || 'Usuário'} 
                                 width={150} 
                                 height={150} 

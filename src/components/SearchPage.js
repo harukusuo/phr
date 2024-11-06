@@ -29,21 +29,31 @@ const SearchPage = () => {
 
     useEffect(() => {
         const fetchUsers = async () => {
-            if(search.length > 0) {
-                try {
-                    const response = await fetch(`/api/users/search?query=${search}`);
-                    const data = await response.json();
-                    setUsers(data);
-                } catch (error) {
-                    console.error('Erro ao buscar usuários:', error);
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    console.error('Token não encontrado');
+                    return;
                 }
-            } else {
-                setUsers([]);
+                const response = await fetch(`/api/users/search?query=${query}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar usuários');
+                }
+                const data = await response.json();
+                setUsers(data);
+            } catch (error) {
+                console.error('Erro ao buscar usuários:', error);
             }
         };
 
-        fetchUsers();
-    }, [search]);
+        if (query) {
+            fetchUsers();
+        }
+    }, [query]);
 
     const handleUserClick = (userId) => {
         navigate(`/profile/${userId}`);
