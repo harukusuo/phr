@@ -26,7 +26,7 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
 
         const fetchUser = async () => {
             try {
-                const response = await fetch(`/api/users/${id}`, {
+                const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/users/${id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -59,7 +59,7 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
 
         const fetchPosts = async () => {
             try {
-                const response = await fetch(`/api/posts/owner/${profileUser._id}`, {
+                const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/posts/owner/${profileUser._id}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -95,7 +95,7 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
     useEffect(() => {
         const fetchPets = async () => {
             try {
-                const response = await fetch(`/api/pets/owner/${id}`);
+                const response = await fetch(process.env.REACT_APP_API_BASE_URL +`/api/pets/owner/${id}`);
                 if (!response.ok) {
                     throw new Error('Erro ao buscar pets');
                 }
@@ -116,7 +116,7 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
             reader.onloadend = async () => {
                 const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
                 try {
-                    const response = await fetch(`/api/users/${id}`, {
+                    const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/users/${id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
 
     const handleDeletePost = async (postId) => {
         try {
-            const response = await fetch(`/api/posts/${postId}`, {
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/posts/${postId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -161,7 +161,7 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
 
     const handleLikePost = async (postId, isLiked) => {
         try {
-            const response = await fetch(`/api/posts/${postId}/${isLiked ? 'dislike' : 'like'}`, {
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/posts/${postId}/${isLiked ? 'dislike' : 'like'}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -179,7 +179,7 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
 
     const handleAddComment = async (postId, commentText) => {
         try {
-            const response = await fetch(`/api/posts/${postId}/comments`, {
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/posts/${postId}/comments`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

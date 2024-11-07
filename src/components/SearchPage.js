@@ -35,7 +35,7 @@ const SearchPage = () => {
                     console.error('Token não encontrado');
                     return;
                 }
-                const response = await fetch(`/api/users/search?query=${query}`, {
+                const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/users/search?query=${query}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

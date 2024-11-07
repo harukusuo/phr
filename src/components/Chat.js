@@ -30,7 +30,7 @@ const Chat = ({user, token}) => {
                     return;
                 }
                 try {
-                    const response = await fetch(`/api/users/messages/to/${otherUserId}`, {
+                    const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/users/messages/to/${otherUserId}`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }
@@ -57,7 +57,7 @@ const Chat = ({user, token}) => {
                 return;
             }
             try {
-                const response = await fetch(`/api/users/${otherUserId}`, {
+                const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/users/${otherUserId}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -96,7 +96,7 @@ const Chat = ({user, token}) => {
         };
 
         try {
-            const response = await fetch(`/api/users/messages/to/${otherUserId}`, {
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/users/messages/to/${otherUserId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

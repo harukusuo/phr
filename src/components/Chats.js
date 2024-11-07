@@ -18,7 +18,7 @@ const Chats = ({ user, token }) => {
                 return;
             }
             try {
-                const response = await fetch('/api/users/messages/latest', {
+                const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/users/messages/latest', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`

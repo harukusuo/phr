@@ -18,7 +18,7 @@ const HomePage = ({ user, token }) => {
 
       try {
         console.log('Token:', token); 
-        const response = await fetch('/api/posts', {
+        const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/posts', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -68,7 +68,7 @@ const HomePage = ({ user, token }) => {
     handleNewPostModalClose();
 
     try {
-      const response = await fetch('/api/posts', {
+      const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const HomePage = ({ user, token }) => {
 
   const handleDeletePost = async (postId) => {
     try {
-        const response = await fetch(`/api/posts/${postId}`, {
+        const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/posts/${postId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -121,7 +121,7 @@ const HomePage = ({ user, token }) => {
 
   const handleLikePost = async (postId, isLiked) => {
     try {
-        const response = await fetch(`/api/posts/${postId}/${isLiked ? 'dislike' : 'like'}`, {
+        const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/posts/${postId}/${isLiked ? 'dislike' : 'like'}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`

@@ -15,7 +15,7 @@ const PetCardProfile = ({ pet, type, onActionClick, user, token }) => {
             : `Olá, eu sou o dono do pet ${pet.name || 'encontrado'}. Por favor, entre em contato comigo.`;
 
         try {
-            const response = await fetch(`/api/users/messages/to/${pet.user._id}`, {
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/users/messages/to/${pet.user._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

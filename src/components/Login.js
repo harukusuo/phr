@@ -20,6 +20,8 @@ const Login = ({ setUser, setToken }) => {
     }
   }, [loginSuccess]);
 
+  console.log("API_URL: " + process.env.REACT_APP_API_BASE_URL);
+
   async function handleLogin(event) {
     event.preventDefault();
     setEmailError('');
@@ -45,7 +47,7 @@ const Login = ({ setUser, setToken }) => {
 
     // faz login
     try {
-      const res = await fetch('/api/login', {
+      const res = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

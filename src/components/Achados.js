@@ -11,7 +11,7 @@ const Achados = ({ user, token }) => {
     useEffect(() => {
         const fetchPets = async () => {
             try {
-                const response = await fetch('/api/pets/found');
+                const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/pets/found');
                 const data = await response.json();
                 setPets(data);
             } catch (error) {
@@ -29,7 +29,7 @@ const Achados = ({ user, token }) => {
         }
         const message = `Olá, eu sou o dono do pet ${pet.name || 'encontrado'}. Por favor, entre em contato comigo.`;
         try {
-            const response = await fetch(`/api/users/messages/to/${pet.user._id}`, {
+            const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/users/messages/to/${pet.user._id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
