@@ -3,7 +3,6 @@ import '../styles/Cadastro.css';
 import Header from './Header';
 import { useNavigate } from 'react-router-dom';
 import noUser from '../assets/noUser.png';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Cadastro = () => {
   const [firstName, setFirstName] = useState('');
@@ -146,7 +145,9 @@ const Cadastro = () => {
             style={{ borderRadius: '15px' }}
           />
           <span className="cadastro-passwordToggle" onClick={togglePasswordVisibility}>
-            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+            <span className="material-symbols-outlined">
+              {passwordVisible ? 'visibility_off' : 'visibility'}
+            </span>
           </span>
         </div>
       </div>
@@ -163,7 +164,9 @@ const Cadastro = () => {
             style={{ borderRadius: '15px' }}
           />
           <span className="cadastro-passwordToggle" onClick={toggleConfirmPasswordVisibility}>
-            {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+            <span className="material-symbols-outlined">
+              {confirmPasswordVisible ? 'visibility_off' : 'visibility'}
+            </span>
           </span>
         </div>
         <p className="cadastro-errorMessage">{passwordError}</p>

@@ -4,7 +4,6 @@ import '../styles/Login.css';
 import loginImage from '../assets/loginIMG.png';
 import Header from './Header';
 import User from '../models/user';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = ({ setUser, setToken }) => {
   const [email, setEmail] = useState('');
@@ -140,7 +139,9 @@ const Login = ({ setUser, setToken }) => {
             style={{ borderRadius: '15px' }}
           />
           <span className="login-passwordToggle" onClick={togglePasswordVisibility}>
-            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+            <span className="material-symbols-outlined">
+              {passwordVisible ? 'visibility_off' : 'visibility'}
+            </span>
           </span>
         </div>
         <p className="login-errorMessage">{passwordError}</p>

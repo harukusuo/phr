@@ -35,6 +35,19 @@
   padding: 0 10px;
 }
 
+.cadastro-passwordContainer {
+  position: relative;
+  width: 100%;
+}
+
+.cadastro-passwordToggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 .cadastro-button {
   background-color: #DD6A00;
   padding: 10px 20px;
