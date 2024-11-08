@@ -48,6 +48,13 @@ const Chats = ({ user, token }) => {
         navigate('/search');
     }
 
+    const truncateMessage = (message, maxLength) => {
+        if (message.length > maxLength) {
+            return message.substring(0, maxLength) + '...';
+        }
+        return message;
+    };
+
     return (
         <div className="chats-container adjusted-container">
             <Header text="Chats" hasBackButton={false} />
@@ -62,7 +69,7 @@ const Chats = ({ user, token }) => {
                                 <div className="chats-message-timestamp">{new Date(conv.timestamp).toLocaleString()}</div>
                                 <div className="chats-message-sender">
                                     {conv.sender == user._id ? (<div className="chats-message-sender-name">Você: </div>) : <></>}
-                                    <div className="chats-message-text">{conv.message}</div>
+                                    <div className="chats-message-text">{truncateMessage(conv.message, 50)}</div>
                                 </div>
                             </div>
                         </div>
