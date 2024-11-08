@@ -54,6 +54,17 @@ function NavBar({ user }) {
         };
     }, []);
 
+    useEffect(() => {
+        const handleFocus = () => {
+            updateNavBarsVisibility();
+        };
+
+        window.addEventListener('focus', handleFocus);
+        return () => {
+            window.removeEventListener('focus', handleFocus);
+        };
+    }, []);
+
     return (
         <div>
             {sideBarVisible && <SideBar user={user}/>}
