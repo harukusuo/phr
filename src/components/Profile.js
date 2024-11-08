@@ -18,6 +18,10 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const handleNavigation = (path) => {
+        navigate(path);
+    };
+
     useEffect(() => {
 
         if (!user || !token) {
@@ -229,9 +233,13 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
                     <div className='profile-content-info-header'>
                         <div className="profile-info">
                             <span className="profile-username">{profileUser.name} {profileUser.surname}</span>
-                            {user?._id !== id && (
+                            {user?._id !== id ? (
                                 <button className="send-message-button" onClick={handleSendMessage}>
                                     <span className="material-symbols-outlined">mail</span> Enviar Mensagem
+                                </button>
+                            ) : (
+                                <button className="logout-button" onClick={() => handleNavigation('/')}>
+                                    <span className="material-symbols-outlined">logout</span> Sair
                                 </button>
                             )}
                         </div>
