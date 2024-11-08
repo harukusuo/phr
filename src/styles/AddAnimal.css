@@ -6,13 +6,12 @@
   height: 100vh;
   padding: 20px;
   background-color: #FFF3E0;
-  overflow-y: auto;
 }
 
 .add-animal-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -24,7 +23,6 @@
 .add-animal-form label {
   font-weight: bold;
   color: #333;
-  margin-bottom: 5px;
 }
 
 .add-animal-form input,
@@ -35,7 +33,6 @@
   border: 1px solid #ccc;
   font-size: 16px;
   width: 100%;
-  margin-bottom: 10px;
 }
 
 .add-animal-form textarea {
@@ -52,7 +49,6 @@
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
-  margin-top: 20px;
 }
 
 .submit-button:hover {
@@ -60,17 +56,10 @@
 }
 
 .add-animal-form input[type="file"] {
-  padding: 10px;
-  border: 1px dashed #ccc;
+  padding: 5px;
+  border: none;
   font-size: 16px;
   width: 100%;
-  cursor: pointer;
-}
-
-.add-animal-form .photo-preview {
-  margin-top: 10px;
-  max-width: 100%;
-  border-radius: 10px;
 }
 
 .add-animal-form textarea::placeholder {
@@ -96,16 +85,6 @@
   width: 300px;
   height: auto;
   display: none;
-}
-
-@media (min-width: 768px) {
-  .add-animal-container {
-    padding: 40px;
-  }
-
-  .add-animal-form {
-    padding: 30px;
-  }
 }
 
 @media (min-width: 1080px) {

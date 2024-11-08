@@ -19,26 +19,13 @@ const AddAnimal = ({user}) => {
     photo: null,
   });
 
-  const [preview, setPreview] = useState(null);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAnimalData({ ...animalData, [name]: value });
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setAnimalData({ ...animalData, photo: file });
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setPreview(reader.result);
-    };
-    if (file) {
-      reader.readAsDataURL(file);
-    } else {
-      setPreview(null);
-    }
+    setAnimalData({ ...animalData, photo: e.target.files[0] });
   };
 
   const convertToBase64 = (file) => {
@@ -169,7 +156,7 @@ const AddAnimal = ({user}) => {
               accept="image/*"
               onChange={handleFileChange}
             />
-            {preview && <img src={preview} alt="Pré-visualização" className="photo-preview" />}
+
             <button type="submit" className="submit-button">Salvar Animal</button>
           </form>
         </div>
