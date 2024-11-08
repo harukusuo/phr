@@ -4,6 +4,7 @@ import '../styles/Login.css';
 import loginImage from '../assets/loginIMG.png';
 import Header from './Header';
 import User from '../models/user';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Login = ({ setUser, setToken }) => {
   const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ const Login = ({ setUser, setToken }) => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
   const successMessageRef = useRef(null);
 
@@ -100,6 +102,10 @@ const Login = ({ setUser, setToken }) => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
     <div className="login-container">
       <Header text="Login" />
@@ -123,15 +129,20 @@ const Login = ({ setUser, setToken }) => {
 
       <div className="login-inputLabel">
         <p className="login-labelText">Insira abaixo a sua senha:</p>
-        <input
-          className="login-input"
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onKeyPress={handleKeyPress}
-          style={{ borderRadius: '15px' }}
-        />
+        <div className="login-passwordContainer">
+          <input
+            className="login-input"
+            type={passwordVisible ? 'text' : 'password'}
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyPress={handleKeyPress}
+            style={{ borderRadius: '15px' }}
+          />
+          <span className="login-passwordToggle" onClick={togglePasswordVisibility}>
+            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
         <p className="login-errorMessage">{passwordError}</p>
       </div>
 

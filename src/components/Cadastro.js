@@ -3,6 +3,7 @@ import '../styles/Cadastro.css';
 import Header from './Header';
 import { useNavigate } from 'react-router-dom';
 import noUser from '../assets/noUser.png';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Cadastro = () => {
   const [firstName, setFirstName] = useState('');
@@ -14,6 +15,8 @@ const Cadastro = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordError2, setPasswordError2] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const navigate = useNavigate();
   const successMessageRef = useRef(null);
 
@@ -79,6 +82,14 @@ const Cadastro = () => {
     }
   }
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setConfirmPasswordVisible(!confirmPasswordVisible);
+  };
+
   return (
     <div className="cadastro">
       <Header text="Cadastro" />
@@ -125,26 +136,36 @@ const Cadastro = () => {
 
       <div className="cadastro-inputLabel">
         <p className="cadastro-labelText">Escolha uma senha</p>
-        <input
-          className="cadastro-input"
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ borderRadius: '15px' }}
-        />
+        <div className="cadastro-passwordContainer">
+          <input
+            className="cadastro-input"
+            type={passwordVisible ? 'text' : 'password'}
+            placeholder="Senha"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ borderRadius: '15px' }}
+          />
+          <span className="cadastro-passwordToggle" onClick={togglePasswordVisibility}>
+            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
       </div>
 
       <div className="cadastro-inputLabel">
         <p className="cadastro-labelText">Confirme sua senha</p>
-        <input
-          className="cadastro-input"
-          type="password"
-          placeholder="Confirmar Senha"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          style={{ borderRadius: '15px' }}
-        />
+        <div className="cadastro-passwordContainer">
+          <input
+            className="cadastro-input"
+            type={confirmPasswordVisible ? 'text' : 'password'}
+            placeholder="Confirmar Senha"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            style={{ borderRadius: '15px' }}
+          />
+          <span className="cadastro-passwordToggle" onClick={toggleConfirmPasswordVisibility}>
+            {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+          </span>
+        </div>
         <p className="cadastro-errorMessage">{passwordError}</p>
         <p className="cadastro-errorMessage">{passwordError2}</p>
       </div>
