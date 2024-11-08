@@ -5,6 +5,7 @@ import Header from './Header';
 import '../styles/HomePage.css';
 
 import postIcon from '../assets/postar.png';
+import noUser from '../assets/noUser.png';
 
 const HomePage = ({ user, token }) => {
   const [posts, setPosts] = useState([]);
@@ -31,12 +32,15 @@ const HomePage = ({ user, token }) => {
         const data = await response.json();
         const formattedPosts = data.map(post => ({
           id: post._id,
-          user: post.user,
+          user: { ...post.user, profilePic: post.user.profilePic || noUser },
           content: post.text,
           time: new Date(post.createdAt),
           likes: post.likes.length,
           likedByUser: post.likes.includes(user._id),
-          comments: post.comments
+          comments: post.comments.map(comment => ({
+            ...comment,
+            user: { ...comment.user, profilePic: comment.user.profilePic || noUser }
+          }))
         }));
 
         formattedPosts.sort((a, b) => b.time - a.time);
@@ -139,7 +143,7 @@ const HomePage = ({ user, token }) => {
 
   const handleAddComment = async (postId, commentText) => {
     try {
-        const response = await fetch(`/api/posts/${postId}/comments`, {
+        const response = await fetch(process.env.REACT_APP_API_BASE_URL + `/api/posts/${postId}/comments`, { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

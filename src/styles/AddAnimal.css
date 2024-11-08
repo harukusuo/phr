@@ -70,6 +70,14 @@
   color: #999;
 }
 
+.textarea::placeholder {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-size: inherit;
+  color: #999;
+}
+
 .add-animal-pic {
   position: fixed;
   bottom: 20px;

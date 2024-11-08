@@ -63,7 +63,7 @@ const AddAnimal = ({user}) => {
       console.log('Dados enviados:', formData);
 
       const token = localStorage.getItem('token');
-      const response = await axios.post('/api/pets', formData, {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/pets`, formData, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,

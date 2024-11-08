@@ -55,7 +55,7 @@ const Cadastro = () => {
           surname: lastName,
           email: email,
           password: password,
-          profilePicture: noUser
+          profilePic: noUser
         }),
       });
       const data = await res.json();
@@ -65,7 +65,9 @@ const Cadastro = () => {
         return;
       }
       setSignupSuccess(true);
-      successMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+      if (successMessageRef.current) {
+        successMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
       
       setTimeout(() => {
         window.scrollTo(0, 0);

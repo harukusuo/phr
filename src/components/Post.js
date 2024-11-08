@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Colapsavel from "./Colapsavel";
 import { useState } from "react";
 import ProfilePic from './ProfilePic';
+import noUser from '../assets/noUser.png';
 
 function timeSince(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
@@ -72,7 +73,7 @@ const Post = ({ user, post, onDelete, onLike, onAddComment }) => {
         <div className="post">
             <div className="post-header">
                 <div className="post-profile-pic-container" onClick={() => handleUserClick(user._id)}>
-                    <ProfilePic src={user?.profilePic} alt={`${user?.name}'s profile`} className="post-profile-pic" width={50} height={50} />
+                    <ProfilePic src={user?.profilePic || noUser} alt={`${user?.name}'s profile`} className="post-profile-pic" width={50} height={50} />
                 </div>
                 <div className="post-header-info">
                     <span className="post-header-info-username" onClick={() => handleUserClick(user._id)}>{user?.name} {user?.surname}</span>
@@ -105,9 +106,9 @@ const Post = ({ user, post, onDelete, onLike, onAddComment }) => {
                 <Colapsavel title={<div className="colapsavel-title">Comentários</div>}>
                     <div className="post-comments">
                         {comments.map(comment => (
-                            <div key={comment._id} className="comment">
+                            <div key={comment._id} className="comment"> 
                                 <div className="comment-profile-pic-container" onClick={() => handleUserClick(comment.user._id)}>
-                                    <ProfilePic src={comment.user?.profilePic} alt={`${comment.user?.name} ${comment.user?.surname}'s profile`} className="comment-profile-pic" width={30} height={30} />
+                                    <ProfilePic src={comment.user?.profilePic || noUser} alt={`${comment.user?.name} ${comment.user?.surname}'s profile`} className="comment-profile-pic" width={30} height={30} />
                                 </div>
                                 <div>
                                     <span className="comment-profile-username-container" onClick={() => handleUserClick(comment.user._id)}>{comment.user?.name} {comment.user?.surname}</span>: {comment.text}
