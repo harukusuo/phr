@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/phr/static/css/main.ecebc4fb.css",
-    "main.js": "/phr/static/js/main.415f5283.js",
+    "main.css": "/phr/static/css/main.441ef141.css",
+    "main.js": "/phr/static/js/main.68d661f0.js",
     "static/media/perdido.png": "/phr/static/media/perdido.e347a0acef5cdd04ae0f.png",
     "static/media/add_pic.png": "/phr/static/media/add_pic.25eb207e5ec31d117a47.png",
     "static/media/notFound.png": "/phr/static/media/notFound.a6ffbf5cc8f45f280554.png",
@@ -19,11 +19,11 @@
     "static/media/postar.png": "/phr/static/media/postar.36f6395bb4ac09d68513.png",
     "static/media/home.png": "/phr/static/media/home.015f2ab4b85387d51daa.png",
     "index.html": "/phr/index.html",
-    "main.ecebc4fb.css.map": "/phr/static/css/main.ecebc4fb.css.map",
-    "main.415f5283.js.map": "/phr/static/js/main.415f5283.js.map"
+    "main.441ef141.css.map": "/phr/static/css/main.441ef141.css.map",
+    "main.68d661f0.js.map": "/phr/static/js/main.68d661f0.js.map"
   },
   "entrypoints": [
-    "static/css/main.ecebc4fb.css",
-    "static/js/main.415f5283.js"
+    "static/css/main.441ef141.css",
+    "static/js/main.68d661f0.js"
   ]
 }
