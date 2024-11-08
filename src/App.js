@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import WelcomeScreen from './components/WelcomeScreen';
 import LoginScreen from './components/Login';
 import HomePage from './components/HomePage';
@@ -51,7 +51,7 @@ function App() {
     }, [token]);
 
     return (
-    <Router basename="/phr">
+    <Router>
       <div className="App">
         <NavBar user={user}/>
         <Routes>
