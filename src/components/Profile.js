@@ -238,7 +238,7 @@ const Profile = ({ user, token, setUser }) => { // Adicione setUser como prop
                                     <span className="material-symbols-outlined">mail</span> Enviar Mensagem
                                 </button>
                             ) : (
-                                <button className="logout-button" onClick={() => handleNavigation('/')}>
+                                <button className="send-message-button" onClick={() => handleNavigation('/')}>
                                     <span className="material-symbols-outlined">logout</span> Sair
                                 </button>
                             )}
