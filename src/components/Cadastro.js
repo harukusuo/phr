@@ -33,7 +33,8 @@ const Cadastro = () => {
       setEmailError('Por favor, preencha todos os campos.');
       return;
     }
-    if (!email.endsWith('@gmail.com') && !email.endsWith('@outlook.com') && !email.endsWith('@educar.rs.gov.br.com') && !email.endsWith('@yahoo.com') && !email.endsWith('@hotmail.com')) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
       setEmailError('Por favor, insira um e-mail válido.');
       return;
     }

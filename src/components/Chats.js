@@ -5,11 +5,13 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ProfilePic from './ProfilePic';
 import notFound from '../assets/notFound.png';
+import FAQModal from './FAQModal';
 
 const Chats = ({ user, token }) => {
 
     const navigate = useNavigate();
     const [latestMessages, setLatestMessages] = useState([]);
+    const [isFAQModalOpen, setIsFAQModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchConversations = async () => {
@@ -55,10 +57,17 @@ const Chats = ({ user, token }) => {
         return message;
     };
 
+    const handleHelpClick = () => {
+        setIsFAQModalOpen(true);
+    };
+
+    const handleFAQModalClose = () => {
+        setIsFAQModalOpen(false);
+    };
+
     return (
         <div className="chats-container adjusted-container">
             <Header text="Chats" hasBackButton={false} />
-
             <div className="chats-messages">
                 {latestMessages.length > 0 ? (
                     latestMessages.map((conv, index) => (
@@ -93,6 +102,7 @@ const Chats = ({ user, token }) => {
                     <li>🚫 Não compartilhe informações pessoais.</li>
                 </ul>
             </div>
+            <FAQModal isOpen={isFAQModalOpen} onClose={handleFAQModalClose} />
         </div>
     );
 }

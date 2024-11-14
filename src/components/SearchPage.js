@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import searchIcon from '../assets/searching.png'
 import lookingPets from '../assets/looking_pets.png'
 import ProfilePic from './ProfilePic'
+import FAQModal from './FAQModal'
 
 const SearchPage = () => {
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ const SearchPage = () => {
     const [search, setSearch] = useState('');
 
     const [users, setUsers] = useState([]);
+    const [isFAQModalOpen, setIsFAQModalOpen] = useState(false);
 
     useEffect(() => {
         if(query) {
@@ -59,10 +61,17 @@ const SearchPage = () => {
         navigate(`/profile/${userId}`);
     };
 
+    const handleHelpClick = () => {
+        setIsFAQModalOpen(true);
+    };
+
+    const handleFAQModalClose = () => {
+        setIsFAQModalOpen(false);
+    };
+
     return (
         <div className="searchpage-container">
             <Header text="Busca" hasBackButton={false} />
-
             <div className="searchpage-search">
                 <input autoFocus placeholder="Buscar" className="searchpage-search-input" value={search} onChange={handleSearch}/>
                 <button className="searchpage-search-button">
@@ -86,6 +95,7 @@ const SearchPage = () => {
                     ))}
                 </div>
             )}
+            <FAQModal isOpen={isFAQModalOpen} onClose={handleFAQModalClose} />
         </div>
     );
 }

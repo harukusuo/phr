@@ -6,10 +6,12 @@ import missingIcon from '../assets/perdido.png';
 import foundIcon from '../assets/achado.png';
 import addIcon from '../assets/add.png';
 import fakeUser from '../mock/user.json';
+import FAQModal from './FAQModal';
 
 const Pets = () => {
   const navigate = useNavigate();
   const [user] = useState(fakeUser);
+  const [isFAQModalOpen, setIsFAQModalOpen] = useState(false);
 
   const handleMissingClick = () => {
     navigate(`/Perdidos`);
@@ -23,10 +25,17 @@ const Pets = () => {
     navigate(`/AddAnimal`);
   };
 
+  const handleHelpClick = () => {
+    setIsFAQModalOpen(true);
+  };
+
+  const handleFAQModalClose = () => {
+    setIsFAQModalOpen(false);
+  };
+
   return (
     <div className="pets-container">
       <Header text="Pets" hasBackButton={false} />
-
       <div className="pets-content">
         <div className="buttons-container">
           <div className="buttons-pets">
@@ -72,6 +81,7 @@ const Pets = () => {
           </p>
         </div>
       </div>
+      <FAQModal isOpen={isFAQModalOpen} onClose={handleFAQModalClose} />
     </div>
   );
 };

@@ -6,9 +6,11 @@ import '../styles/HomePage.css';
 
 import postIcon from '../assets/postar.png';
 import noUser from '../assets/noUser.png';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = ({ user, token }) => {
   const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -164,7 +166,6 @@ const HomePage = ({ user, token }) => {
   return (
     <div className="homepage-container">
       <Header text="Home" hasBackButton={false} />
-
       <Posts posts={posts} onDelete={handleDeletePost} onLike={handleLikePost} onAddComment={handleAddComment} />
 
       <NewPost
@@ -179,7 +180,6 @@ const HomePage = ({ user, token }) => {
       >
         <img src={postIcon} alt="Postar" className="homepage-newPostButtonIcon" />
       </div>
-
     </div>
   );
 }
