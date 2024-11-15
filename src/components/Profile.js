@@ -342,7 +342,7 @@ const Profile = ({ user, token, setUser }) => {
                                     key={index}
                                     pet={pet}
                                     type={pet.status}
-                                    onActionClick={handleActionClick}
+                                    onActionClick={user._id === pet.user._id ? handleDeletePet : handleActionClick}
                                     user={user}
                                     token={token}
                                     showDetails={false}

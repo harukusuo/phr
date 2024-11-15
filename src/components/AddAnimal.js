@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/AddAnimal.css';
 import Header from './Header';
-import fakeUser from '../mock/user.json';
 import addPic from '../assets/add_pic.png';
 
 const AddAnimal = ({user}) => {
@@ -18,6 +17,11 @@ const AddAnimal = ({user}) => {
     status: 'Encontrado',
     photo: null,
   });
+
+  const validCities = [
+    'Campo Bom', 'Igrejinha', 'Nova Hartz', 'Novo Hamburgo', 
+    'Parobé', 'Rolante', 'Sapiranga', 'Taquara', 'Três Coroas'
+  ];
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -118,14 +122,16 @@ const AddAnimal = ({user}) => {
             />
 
             <label htmlFor="city">Cidade</label>
-            <input
-              type="text"
+            <select
               id="city"
               name="city"
               value={animalData.city}
               onChange={handleInputChange}
-              placeholder="Cidade onde foi visto"
-            />
+            >
+              {validCities.map((city) => (
+                <option key={city} value={city}>{city}</option>
+              ))}
+            </select>
 
             <label htmlFor="local">Localização</label>
             <input

@@ -3,10 +3,14 @@ import '../styles/PetCardProfile.css';
 
 const PetCardProfile = ({ pet, type, onActionClick, user, token, onDelete }) => {
     const isLost = type === 'perdido';
-    const buttonText = isLost ? 'Encontrei!' : 'É meu!';
+    const buttonText = user._id === pet.user._id ? 'Excluir pet' : (isLost ? 'Encontrei!' : 'É meu!');
     const [showDeleteMenu, setShowDeleteMenu] = useState(false);
 
     const handleClick = async () => {
+        if (user._id === pet.user._id) {
+            handleDeleteClick();
+            return;
+        }
         if (!token) {
             console.error('Token não fornecido');
             return;
@@ -53,20 +57,15 @@ const PetCardProfile = ({ pet, type, onActionClick, user, token, onDelete }) => 
                 <h3>{pet.name} - {pet.type}</h3>
                 <p><strong>Local:</strong> {pet.location}, {pet.city}</p>
             </div>
-            {onActionClick && (
+            {user._id !== pet.user._id && onActionClick && (
                 <button className="pet-action-button-profile" onClick={handleClick}>
                     {buttonText}
                 </button>
             )}
             {user._id === pet.user._id && (
-                <div className="pet-options">
-                    <span className="material-symbols-outlined" onClick={() => setShowDeleteMenu(!showDeleteMenu)}>more_vert</span>
-                    {showDeleteMenu && (
-                        <div className="delete-menu">
-                            <span onClick={handleDeleteClick}>Excluir pet</span>
-                        </div>
-                    )}
-                </div>
+                <button className="pet-action-button-profile" onClick={handleDeleteClick}>
+                    {buttonText}
+                </button>
             )}
         </div>
     );

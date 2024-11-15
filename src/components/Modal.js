@@ -35,7 +35,7 @@ const Modal = ({ isOpen, onClose, children }) => {
     }
 
     return (
-        <dialog ref={modalRef} className="modal" onKeyDown={handleModalKeyDown}>
+        <dialog ref={modalRef} className="modal" onKeyDown={handleModalKeyDown} style={{ width: '100%', maxWidth: '600px' }}>
             <button className="modal-close-btn" onClick={handleModalClose}>X</button>
             {children}
         </dialog>

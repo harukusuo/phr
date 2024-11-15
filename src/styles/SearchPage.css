@@ -82,4 +82,9 @@
     .searchpage-search {
         max-width: 90%;
     }
+    .searchpage-placeholder {
+        align-items: center;
+        margin-bottom: 0;
+        margin-top: 12rem;
+    }
 }

@@ -13,6 +13,8 @@ const FAQModal = ({ isOpen, onClose }) => {
                     </button>
                     <h2>Perguntas Frequentes</h2>
                     <div className="faq-content">
+                        <h3>Qual a finalidade do site PetHelp?</h3>
+                        <p>O PetHelp tem como objetivo diminuir o número de animais errantes nas ruas, facilitar reencontros entre tutores e seus pets e, simultaneamente, incentivar a adoção e a doação responsável, com foco na região do Vale do Paranhana.</p>
                         <h3>Como modifico minha foto de perfil?</h3>
                         <p>Para alterar sua foto de perfil, acesse seu perfil e clique na imagem atual. Em seguida, escolha um arquivo de sua galeria ou dispositivo para ser sua nova foto de perfil.</p>
                         <h3>Qual a finalidade dos posts?</h3>
@@ -33,6 +35,8 @@ const FAQModal = ({ isOpen, onClose }) => {
                         <p>A plataforma PetHelp protege suas informações com criptografia e não compartilha dados pessoais com terceiros sem autorização.</p>
                         <h3>Há algum custo para usar a plataforma?</h3>
                         <p>Não, todos os serviços oferecidos pela PetHelp são gratuitos. Queremos incentivar a comunidade a ajudar os animais sem barreiras financeiras.</p>
+                        <h3>Como posso entrar em contato com os desenvolvedores?</h3>
+                        <p>Caso deseje relatar um bug, reportar o mau comportamento de usuários, dar uma sugestão ou propor uma parceria com os desenvolvedores, basta entrar em contato pelo seguinte endereço de e-mail: pethelpapoio@gmail.com.</p>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    background-color: #f5cac3; /* Ajuste a cor de fundo */
 }
 
 .modal::backdrop {
@@ -22,4 +26,17 @@
     right: 10px;
     cursor: pointer;
     transition: color 0.3s;
+}
+
+@media (max-width: 600px) {
+    .modal {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .modal-close-btn {
+        top: 5px;
+        right: 5px;
+        font-size: 16px;
+    }
 }

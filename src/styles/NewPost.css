@@ -2,7 +2,9 @@
     background-color: #f5cac3;
     padding: 20px;
     border-radius: 10px;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -44,4 +46,34 @@
 
 .new-post-submit-button:hover {
     background-color: #bd5d02;
+}
+
+@media (max-width: 600px) {
+    .new-post-form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .new-post-editor-input {
+        height: 80px;
+    }
+
+    .new-post-submit-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+.new-post-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }

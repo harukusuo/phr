@@ -32,28 +32,30 @@ const NewPost = ({isOpen, onSubmit, onClose}) => {
         }
     }, [isOpen]);
 
-    return <Modal isOpen={isOpen} onClose={onClose} className="new-post-modal">
-        <form onSubmit={handleSubmit} className="new-post-form">
-            <div className="new-post-editor">
-                <label htmlFor="content" className="new-post-editor-label">Novo post</label>
-                <textarea
-                    name="content"
-                    id="content"
-                    ref={focusInputRef}
-                    value={formState.content}
-                    onChange={handleInputChange}
-                    className="new-post-editor-input"
-                />
-            </div>
-            <div className="new-post-submit">
-                <button
-                    type="submit"
-                    className="new-post-submit-button"
-                >
-                    Postar
-                </button>
-            </div>
-        </form>
+    return <Modal isOpen={isOpen} onClose={onClose}>
+        <div className="new-post-modal">
+            <form onSubmit={handleSubmit} className="new-post-form">
+                <div className="new-post-editor">
+                    <label htmlFor="content" className="new-post-editor-label">Novo post</label>
+                    <textarea
+                        name="content"
+                        id="content"
+                        ref={focusInputRef}
+                        value={formState.content}
+                        onChange={handleInputChange}
+                        className="new-post-editor-input"
+                    />
+                </div>
+                <div className="new-post-submit">
+                    <button
+                        type="submit"
+                        className="new-post-submit-button"
+                    >
+                        Postar
+                    </button>
+                </div>
+            </form>
+        </div>
     </Modal>
 }
 
