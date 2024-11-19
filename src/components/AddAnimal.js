@@ -170,6 +170,7 @@ const AddAnimal = ({user}) => {
             />
 
             <button type="submit" className="submit-button">Salvar Animal</button>
+            <div style={{ height: '60px' }}></div>
           </form>
         </div>
       </div>
