@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import '../styles/PetCardProfile.css';
+import Toast from './Toast';
 
 const PetCardProfile = ({ pet, type, onActionClick, user, token, onDelete }) => {
     const isLost = type === 'perdido';
     const buttonText = user._id === pet.user._id ? 'Excluir pet' : (isLost ? 'Encontrei!' : 'É meu!');
     const [showDeleteMenu, setShowDeleteMenu] = useState(false);
+    const [showToast, setShowToast] = useState(false);
+    const [showDeleteToast, setShowDeleteToast] = useState(false);
 
     const handleClick = async () => {
         if (user._id === pet.user._id) {
@@ -37,6 +40,7 @@ const PetCardProfile = ({ pet, type, onActionClick, user, token, onDelete }) => 
             }
 
             console.log(`Mensagem enviada para o anunciante do pet ${pet.name}`);
+            setShowToast(true);
         } catch (error) {
             console.error('Erro ao enviar mensagem:', error);
         }
@@ -45,6 +49,7 @@ const PetCardProfile = ({ pet, type, onActionClick, user, token, onDelete }) => 
     const handleDeleteClick = () => {
         if (onDelete) {
             onDelete(pet._id);
+            setShowDeleteToast(true);
         }
     };
 
@@ -67,6 +72,8 @@ const PetCardProfile = ({ pet, type, onActionClick, user, token, onDelete }) => 
                     {buttonText}
                 </button>
             )}
+            {showToast && <Toast message="Mensagem enviada com sucesso!" onClose={() => setShowToast(false)} />}
+            {showDeleteToast && <Toast message="Pet excluído com sucesso!" onClose={() => setShowDeleteToast(false)} />}
         </div>
     );
 };

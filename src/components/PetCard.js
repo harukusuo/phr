@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/PetCard.css';
+import Toast from './Toast';
 
 const PetCard = ({ pet, type, onActionClick, showDetails, user, token }) => {
     const isLost = type === 'perdido';
     const buttonText = isLost ? 'Encontrei!' : 'É meu!';
+    const [showToast, setShowToast] = useState(false);
 
     const handleClick = async () => {
         if (!token) {
@@ -32,32 +34,36 @@ const PetCard = ({ pet, type, onActionClick, showDetails, user, token }) => {
             }
 
             console.log(`Mensagem enviada para o anunciante do pet ${pet.name}`);
+            setShowToast(true);
         } catch (error) {
             console.error('Erro ao enviar mensagem:', error);
         }
     };
 
     return (
-        <div className="pet-card">
-            <div className="pet-image-container">
-                <img src={pet.picture} alt={pet.name} className="pet-image" />
-            </div>
-            <div className="pet-info">
-                <h3>{pet.name} - {pet.type}</h3>
-                <p><strong>Local:</strong> {pet.location}, {pet.city}</p>
-                {showDetails && (
-                    <>
-                        <p><strong>Descrição:</strong> {pet.description}</p>
-                        <p><strong>Anunciante:</strong> {pet.user.name} {pet.user.surname}</p>
-                    </>
+        <>
+            <div className="pet-card">
+                <div className="pet-image-container">
+                    <img src={pet.picture} alt={pet.name} className="pet-image" />
+                </div>
+                <div className="pet-info">
+                    <h3>{pet.name} - {pet.type}</h3>
+                    <p><strong>Local:</strong> {pet.location}, {pet.city}</p>
+                    {showDetails && (
+                        <>
+                            <p><strong>Descrição:</strong> {pet.description}</p>
+                            <p><strong>Anunciante:</strong> {pet.user.name} {pet.user.surname}</p>
+                        </>
+                    )}
+                </div>
+                {onActionClick && (
+                    <button className="pet-action-button" onClick={handleClick}>
+                        {buttonText}
+                    </button>
                 )}
             </div>
-            {onActionClick && (
-                <button className="pet-action-button" onClick={handleClick}>
-                    {buttonText}
-                </button>
-            )}
-        </div>
+            {showToast && <Toast message="Mensagem enviada com sucesso!" onClose={() => setShowToast(false)} />}
+        </>
     );
 };
 

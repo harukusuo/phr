@@ -32,9 +32,8 @@ const NewPost = ({isOpen, onSubmit, onClose}) => {
         }
     }, [isOpen]);
 
-    return <Modal isOpen={isOpen} onClose={onClose}>
-        <div className="new-post-modal">
-            <form onSubmit={handleSubmit} className="new-post-form">
+    return <Modal isOpen={isOpen} onClose={onClose} className="new-post-form">
+            <form onSubmit={handleSubmit} className="">
                 <div className="new-post-editor">
                     <label htmlFor="content" className="new-post-editor-label">Novo post</label>
                     <textarea
@@ -55,7 +54,6 @@ const NewPost = ({isOpen, onSubmit, onClose}) => {
                     </button>
                 </div>
             </form>
-        </div>
     </Modal>
 }
 

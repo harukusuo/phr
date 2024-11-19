@@ -4,6 +4,7 @@ import Colapsavel from "./Colapsavel";
 import { useState } from "react";
 import ProfilePic from './ProfilePic';
 import noUser from '../assets/noUser.png';
+import Toast from './Toast';
 
 function timeSince(date) {
     const seconds = Math.floor((new Date() - date) / 1000);
@@ -38,6 +39,7 @@ const Post = ({ user, post, onDelete, onLike, onAddComment }) => {
     const [newComment, setNewComment] = useState("");
     const [comments, setComments] = useState(post.comments);
     const [showDeleteMenu, setShowDeleteMenu] = useState(false);
+    const [showDeleteToast, setShowDeleteToast] = useState(false);
 
     const handleUserClick = (userId) => {
         navigate(`/profile/${userId}`);
@@ -66,6 +68,7 @@ const Post = ({ user, post, onDelete, onLike, onAddComment }) => {
     const handleDeleteClick = () => {
         if (onDelete) {
             onDelete(post.id);
+            setShowDeleteToast(true);
         }
     };
 
@@ -134,6 +137,7 @@ const Post = ({ user, post, onDelete, onLike, onAddComment }) => {
                     <span className="material-symbols-outlined">add_comment</span>
                 </button>
             </form>
+            {showDeleteToast && <Toast message="Post excluído com sucesso!" onClose={() => setShowDeleteToast(false)} />}
         </div>
     );
 };

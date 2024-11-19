@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../styles/AddAnimal.css';
 import Header from './Header';
 import addPic from '../assets/add_pic.png';
+import Toast from './Toast';
 
 const AddAnimal = ({user}) => {
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ const AddAnimal = ({user}) => {
     status: 'Encontrado',
     photo: null,
   });
+
+  const [showToast, setShowToast] = useState(false);
 
   const validCities = [
     'Campo Bom', 'Igrejinha', 'Nova Hartz', 'Novo Hamburgo', 
@@ -74,11 +77,14 @@ const AddAnimal = ({user}) => {
         },
       });
       console.log('Pet adicionado:', response.data);
-      if (animalData.status === 'Encontrado') {
-        navigate(`/Achados`);
-      } else {
-        navigate(`/Perdidos`);
-      }
+      setShowToast(true);
+      setTimeout(() => {
+        if (animalData.status === 'Encontrado') {
+          navigate(`/Achados`);
+        } else {
+          navigate(`/Perdidos`);
+        }
+      }, 2000);
     } catch (error) {
       console.error('Erro ao adicionar pet:', error.response ? error.response.data : error.message);
     }
@@ -168,6 +174,7 @@ const AddAnimal = ({user}) => {
         </div>
       </div>
       <img src={addPic} alt="Imagem ilustrativa de animais" className="add-animal-pic" />
+      {showToast && <Toast message="Animal salvo com sucesso!" onClose={() => setShowToast(false)} />}
     </>
   );
 };
