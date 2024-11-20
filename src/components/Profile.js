@@ -9,7 +9,7 @@ import notFound from '../assets/notFound.png';
 import PetCardProfile from './PetCardProfile';
 import FAQModal from './FAQModal';
 
-const Profile = ({ user, token, setUser }) => { 
+const Profile = ({ user, token, setUser, setToken }) => { 
     const [profileUser, setProfileUser] = useState({});
     const [posts, setPosts] = useState([]);
     const [pets, setPets] = useState([]);
@@ -109,6 +109,11 @@ const Profile = ({ user, token, setUser }) => {
     }, [profileUser, user, token]);
 
     useEffect(() => {
+
+        if (!user || !id || !token) {
+            return;
+        }
+
         const fetchPets = async () => {
             try {
                 const response = await fetch(process.env.REACT_APP_API_BASE_URL +`/api/pets/owner/${id}`);
@@ -123,7 +128,7 @@ const Profile = ({ user, token, setUser }) => {
         };
 
         fetchPets();
-    }, [id]);
+    }, [id, user, token]);
 
     const handleProfilePicChange = async (event) => {
         const file = event.target.files[0];
@@ -226,6 +231,13 @@ const Profile = ({ user, token, setUser }) => {
         navigate(`/chat/${profileUser._id}`);
     };
 
+    const handleLogout = () => {
+        console.log('Saindo...');
+        setUser(null);
+        setToken(null);
+        navigate('/');
+    };
+
     const handleActionClick = (pet) => {
         if (pet.status === 'perdido') {
             console.log('Encontrei o pet:', pet.name);
@@ -269,7 +281,7 @@ const Profile = ({ user, token, setUser }) => {
                                     <span className="material-symbols-outlined">mail</span> Enviar Mensagem
                                 </button>
                             ) : (
-                                <button className="send-message-button" onClick={() => handleNavigation('/')}>
+                                <button className="send-message-button" onClick={handleLogout}>
                                     <span className="material-symbols-outlined">logout</span> Sair
                                 </button>
                             )}

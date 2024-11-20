@@ -11,7 +11,7 @@ const SideBar = ({ user }) => {
 
   return (
     <div className="sideBar">
-      <h1 className="sideBar-title">Olá, {user.name}!</h1>
+      <h1 className="sideBar-title">Olá, {user?.name}!</h1>
       <nav className="sideBar-nav">
         <button onClick={() => handleNavigation('/homepage')}>Home</button>
         <button onClick={() => handleNavigation('/search')}>Buscar</button>

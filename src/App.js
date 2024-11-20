@@ -13,6 +13,7 @@ import Perdidos from './components/Perdidos';
 import Achados from './components/Achados';
 import AddAnimal from './components/AddAnimal';
 import NavBar from './components/NavBar';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function App() {
 
@@ -53,7 +54,7 @@ function App() {
     return (
     <Router>
       <div className="App">
-        <NavBar user={user}/>
+        <NavBar user={user} token={token} setUser={setUser} setToken={setToken} />
         <Routes>
           <Route path="/" element={<WelcomeScreen />} />
           <Route path="/login" element={<LoginScreen setUser={setUser} setToken={setToken}/>} />
@@ -66,7 +67,7 @@ function App() {
           <Route path="/chats" element={<Chats user={user} token={token} />} />
           <Route path="/chat/:id" element={<Chat user={user} token={token} />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/profile/:id" element={<Profile user={user} token={token} setUser={setUser}/>} />
+          <Route path="/profile/:id" element={<Profile user={user} token={token} setUser={setUser} setToken={setToken} />} />
         </Routes>
       </div>
     </Router>

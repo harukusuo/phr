@@ -1,6 +1,5 @@
 import '../styles/SearchPage.css'
 import Header from './Header'
-import BottomBar from './BottomBar'
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import searchIcon from '../assets/searching.png'
@@ -12,7 +11,6 @@ const SearchPage = () => {
     const navigate = useNavigate();
     const { query } = useParams();
 
-    const [user, setUser] = useState(null);
     const [search, setSearch] = useState('');
 
     const [users, setUsers] = useState([]);

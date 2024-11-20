@@ -21,8 +21,6 @@ const Login = ({ setUser, setToken }) => {
     }
   }, [loginSuccess]);
 
-  console.log("API_URL: " + process.env.REACT_APP_API_BASE_URL);
-
   async function handleLogin(event) {
     event.preventDefault();
     setEmailError('');

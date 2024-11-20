@@ -1,16 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 import SideBar from './SideBar';
 import BottomBar from './BottomBar';
 
-function NavBar({ user }) {
-
-    
+function NavBar({ user, token, setUser, setToken }) {
 
     const location = useLocation();
+    const navigate = useNavigate();
     const [sideBarVisible, setSideBarVisible] = useState(false);
     const [bottomBarVisible, setBottomBarVisible] = useState(false);
+
+    // useEffect para verificar se o usuário está logado e redirecionar para a página de login caso não esteja
+    useEffect(() => {
+        const publicRoutes = ['/', '/login', '/cadastro'];
+        const currentPath = location.pathname;
+
+        const checkTokenValidity = () => {
+            try {
+                const decodedToken = jwtDecode(token);
+                const currentTime = Date.now() / 1000;
+
+                if (decodedToken.exp < currentTime) {
+                    throw new Error('Token is expired');
+                }
+            } catch (error) {
+                setUser(null);
+                setToken(null);
+                navigate('/login', { replace: true, state: { from: '/' } });
+            }
+        };
+
+        if (!user && !token && !publicRoutes.includes(currentPath)) {
+            navigate('/login', { replace: true, state: { from: '/' } });
+        } else if (user && token) {
+            checkTokenValidity();
+        }
+    }, [user, token, location, navigate, setUser, setToken]);
 
     useEffect(() => {
 

@@ -103,6 +103,8 @@ const Chats = ({ user, token }) => {
                 </ul>
             </div>
             <FAQModal isOpen={isFAQModalOpen} onClose={handleFAQModalClose} />
+            <div style={{ height: '60px' }}></div>
+            <br></br>
         </div>
     );
 }

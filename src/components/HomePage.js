@@ -20,7 +20,6 @@ const HomePage = ({ user, token }) => {
       }
 
       try {
-        console.log('Token:', token); 
         const response = await fetch(process.env.REACT_APP_API_BASE_URL + '/api/posts', {
           headers: {
             'Authorization': `Bearer ${token}`

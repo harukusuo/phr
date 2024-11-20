@@ -5,13 +5,20 @@
   height: 100vh;
   width: 100%;
   background-color: #f7f9fc;
+  overflow-y: auto;
+  padding-bottom: 60px;
 }
 
 @media (min-width: 768px) {
+  .chats-container {
+    height: 100vh;
+    padding-bottom: 0;
+  }
   .adjusted-container {
     padding-left: 250px;
   }
 }
+
 .chats-messages {
   display: flex;
   flex-direction: column;
