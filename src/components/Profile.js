@@ -268,9 +268,11 @@ const Profile = ({ user, token, setUser, setToken }) => {
     return (
         <div className="profile">
             <Header text={title}/>
-            <div onClick={handleHelpClick} className="help-button">
-                ?
-            </div>
+            {user?._id === id && (
+                <div onClick={handleHelpClick} className="help-button">
+                    ?
+                </div>
+            )}
             <div className="profile-content">
                 <div className='profile-content-info'>
                     <div className='profile-content-info-header'>
