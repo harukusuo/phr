@@ -19,6 +19,7 @@ function App() {
 
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
+    const [userLoaded, setUserLoaded] = useState(false);
 
     // useEffect para obter usuário e token do local storage
     useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
             console.log('Usuário obtido do local storage:', storedUser);
             console.log('Token obtido do local storage:', storedToken);
         }
+        setUserLoaded(true);
     }, []);
 
 
@@ -54,7 +56,7 @@ function App() {
     return (
     <Router>
       <div className="App">
-        <NavBar user={user} token={token} setUser={setUser} setToken={setToken} />
+        <NavBar user={user} token={token} setUser={setUser} setToken={setToken} userLoaded={userLoaded} />
         <Routes>
           <Route path="/" element={<WelcomeScreen />} />
           <Route path="/login" element={<LoginScreen setUser={setUser} setToken={setToken}/>} />

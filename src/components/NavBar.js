@@ -5,7 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import SideBar from './SideBar';
 import BottomBar from './BottomBar';
 
-function NavBar({ user, token, setUser, setToken }) {
+function NavBar({ user, token, setUser, setToken, userLoaded }) {
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -14,6 +14,8 @@ function NavBar({ user, token, setUser, setToken }) {
 
     // useEffect para verificar se o usuário está logado e redirecionar para a página de login caso não esteja
     useEffect(() => {
+        if(!userLoaded) return;
+        
         const publicRoutes = ['/', '/login', '/cadastro'];
         const currentPath = location.pathname;
 
@@ -26,6 +28,7 @@ function NavBar({ user, token, setUser, setToken }) {
                     throw new Error('Token is expired');
                 }
             } catch (error) {
+                console.error(error);
                 setUser(null);
                 setToken(null);
                 navigate('/login', { replace: true, state: { from: '/' } });
@@ -33,11 +36,12 @@ function NavBar({ user, token, setUser, setToken }) {
         };
 
         if (!user && !token && !publicRoutes.includes(currentPath)) {
+            console.log('User and token are missing. Redirecting to login page from path:', currentPath);
             navigate('/login', { replace: true, state: { from: '/' } });
         } else if (user && token) {
             checkTokenValidity();
         }
-    }, [user, token, location, navigate, setUser, setToken]);
+    }, [user, token, location, navigate, setUser, setToken, userLoaded]);
 
     useEffect(() => {
 
