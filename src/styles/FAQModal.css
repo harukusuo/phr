@@ -40,3 +40,12 @@
 .faq-content p {
     margin-top: 10px;
 }
+
+.faq-content p a {
+    text-decoration: none;
+    color: black;
+}
+
+.faq-content p a:hover {
+    color: #DD6A00;
+}

@@ -13,13 +13,14 @@ const AddAnimal = ({user}) => {
     name: '',
     type: 'cão',
     descricao: '',
-    city: '',
+    city: 'Campo Bom',
     local: '',
     status: 'Encontrado',
     photo: null,
   });
 
   const [showToast, setShowToast] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validCities = [
     'Campo Bom', 'Igrejinha', 'Nova Hartz', 'Novo Hamburgo', 
@@ -53,6 +54,7 @@ const AddAnimal = ({user}) => {
       return;
     }
 
+    setIsSubmitting(true);
     try {
       const base64Photo = await convertToBase64(animalData.photo);
 
@@ -87,6 +89,8 @@ const AddAnimal = ({user}) => {
       }, 2000);
     } catch (error) {
       console.error('Erro ao adicionar pet:', error.response ? error.response.data : error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -169,7 +173,7 @@ const AddAnimal = ({user}) => {
               onChange={handleFileChange}
             />
 
-            <button type="submit" className="submit-button">Salvar Animal</button>
+            <button type="submit" className="submit-button" disabled={isSubmitting}>Salvar Animal</button>
             <div style={{ height: '60px' }}></div>
           </form>
         </div>

@@ -78,6 +78,10 @@
     max-width: 300px;
 }
 
+.searchpage-bottom-space {
+    height: 60px;
+}
+
 @media (max-width: 600px) {
     .searchpage-search {
         max-width: 90%;

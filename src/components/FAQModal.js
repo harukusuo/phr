@@ -36,7 +36,7 @@ const FAQModal = ({ isOpen, onClose }) => {
                         <h3>Há algum custo para usar a plataforma?</h3>
                         <p>Não, todos os serviços oferecidos pela PetHelp são gratuitos. Queremos incentivar a comunidade a ajudar os animais sem barreiras financeiras.</p>
                         <h3>Como posso entrar em contato com os desenvolvedores?</h3>
-                        <p>Caso deseje relatar um bug, reportar o mau comportamento de usuários, dar uma sugestão ou propor uma parceria com os desenvolvedores, basta entrar em contato pelo seguinte endereço de e-mail: pethelpapoio@gmail.com.</p>
+                        <p>Caso deseje relatar um bug, reportar o mau comportamento de usuários, dar uma sugestão ou propor uma parceria com os desenvolvedores, basta entrar em contato pelo seguinte endereço de e-mail: <a href="mailto:pethelpapoio@gmail.com">pethelpapoio@gmail.com</a>.</p>
                     </div>
                 </div>
             </div>

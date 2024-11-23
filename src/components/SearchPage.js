@@ -91,6 +91,7 @@ const SearchPage = () => {
                             <div className="searchpage-username">{user.name} {user.surname}</div>
                         </div>
                     ))}
+                    <div className="searchpage-bottom-space"></div>
                 </div>
             )}
             <FAQModal isOpen={isFAQModalOpen} onClose={handleFAQModalClose} />
